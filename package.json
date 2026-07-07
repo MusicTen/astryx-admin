@@ -1,0 +1,42 @@
+{
+  "name": "astryx-admin",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "dev": "vp dev",
+    "build": "vp build",
+    "preview": "vp preview",
+    "test": "vp test run",
+    "lint": "vp lint",
+    "fmt": "vp fmt"
+  },
+  "dependencies": {
+    "@astryxdesign/core": "^0.1.3",
+    "@astryxdesign/theme-neutral": "^0.1.3",
+    "@stylexjs/stylex": "^0.19.0",
+    "@tanstack/react-router": "^1.170.17",
+    "immer": "^11.1.11",
+    "ky": "^2.0.2",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "swr": "^2.4.2",
+    "zustand": "^5.0.14"
+  },
+  "devDependencies": {
+    "@astryxdesign/build": "^0.1.3",
+    "@astryxdesign/cli": "^0.1.3",
+    "@stylexjs/unplugin": "^0.19.0",
+    "@tanstack/router-plugin": "^1.168.19",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.3",
+    "msw": "^2.14.6",
+    "typescript": "^6.0.3",
+    "vite": "^8.1.3",
+    "vite-plus": "^0.2.2"
+  }
+}
