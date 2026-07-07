@@ -1,16 +1,16 @@
-import type { ReactNode } from 'react';
-import { AppShell } from '@astryxdesign/core/AppShell';
-import { SideNav, SideNavItem } from '@astryxdesign/core/SideNav';
-import { Stack } from '@astryxdesign/core/Stack';
-import { TopNav, TopNavHeading } from '@astryxdesign/core/TopNav';
-import { useRouterState } from '@tanstack/react-router';
-import { useUiStore } from '../../stores/ui';
-import { ThemeModeControl } from './ThemeModeControl';
-import { UserMenu } from './UserMenu';
+import type { ReactNode } from "react";
+import { AppShell } from "@astryxdesign/core/AppShell";
+import { SideNav, SideNavItem } from "@astryxdesign/core/SideNav";
+import { Stack } from "@astryxdesign/core/Stack";
+import { TopNav, TopNavHeading } from "@astryxdesign/core/TopNav";
+import { useRouterState } from "@tanstack/react-router";
+import { useUiStore } from "../../stores/ui";
+import { ThemeModeControl } from "./ThemeModeControl";
+import { UserMenu } from "./UserMenu";
 
 const NAV_ITEMS = [
-  { label: '仪表盘', href: '/' },
-  { label: '用户管理', href: '/users' },
+  { label: "仪表盘", href: "/" },
+  { label: "用户管理", href: "/users" },
 ];
 
 export function AdminShell({ children }: { children: ReactNode }) {

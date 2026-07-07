@@ -1,6 +1,6 @@
-import type { ReactNode } from 'react';
-import { SWRConfig } from 'swr';
-import { fetcher } from './http';
+import type { ReactNode } from "react";
+import { SWRConfig } from "swr";
+import { fetcher } from "./http";
 
 export function SwrProvider({ children }: { children: ReactNode }) {
   return (

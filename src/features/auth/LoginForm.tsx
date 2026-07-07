@@ -1,18 +1,18 @@
-import { useState } from 'react';
-import { Banner } from '@astryxdesign/core/Banner';
-import { Button } from '@astryxdesign/core/Button';
-import { Card } from '@astryxdesign/core/Card';
-import { FormLayout } from '@astryxdesign/core/FormLayout';
-import { Stack } from '@astryxdesign/core/Stack';
-import { Text } from '@astryxdesign/core/Text';
-import { TextInput } from '@astryxdesign/core/TextInput';
-import { ApiError } from '../../lib/http';
-import { useAuthStore } from '../../stores/auth';
-import { login } from './api';
+import { useState } from "react";
+import { Banner } from "@astryxdesign/core/Banner";
+import { Button } from "@astryxdesign/core/Button";
+import { Card } from "@astryxdesign/core/Card";
+import { FormLayout } from "@astryxdesign/core/FormLayout";
+import { Stack } from "@astryxdesign/core/Stack";
+import { Text } from "@astryxdesign/core/Text";
+import { TextInput } from "@astryxdesign/core/TextInput";
+import { ApiError } from "../../lib/http";
+import { useAuthStore } from "../../stores/auth";
+import { login } from "./api";
 
 export function LoginForm({ onSuccess }: { onSuccess: () => void }) {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const saveAuth = useAuthStore((state) => state.login);
@@ -25,7 +25,7 @@ export function LoginForm({ onSuccess }: { onSuccess: () => void }) {
       saveAuth(result.token, result.user);
       onSuccess();
     } catch (error) {
-      setErrorMessage(error instanceof ApiError ? error.message : '登录失败，请稍后重试');
+      setErrorMessage(error instanceof ApiError ? error.message : "登录失败，请稍后重试");
     } finally {
       setIsLoading(false);
     }

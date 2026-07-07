@@ -1,8 +1,8 @@
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
-import { immer } from 'zustand/middleware/immer';
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
+import { immer } from "zustand/middleware/immer";
 
-export type ThemeMode = 'light' | 'dark' | 'system';
+export type ThemeMode = "light" | "dark" | "system";
 
 interface UiState {
   themeMode: ThemeMode;
@@ -14,7 +14,7 @@ interface UiState {
 export const useUiStore = create<UiState>()(
   persist(
     immer((set) => ({
-      themeMode: 'system',
+      themeMode: "system",
       isSideNavCollapsed: false,
       setThemeMode: (mode) =>
         set((state) => {
@@ -25,6 +25,6 @@ export const useUiStore = create<UiState>()(
           state.isSideNavCollapsed = isCollapsed;
         }),
     })),
-    { name: 'astryx-admin-ui' },
+    { name: "astryx-admin-ui" },
   ),
 );

@@ -7,17 +7,17 @@
 
 搭建一个可直接开发业务的 admin 管理端项目骨架，技术栈：
 
-| 层 | 选型 |
-|---|---|
-| 包管理 | pnpm（Node ≥ 22.13，写入 `.nvmrc` + `engines`） |
-| 工具链 | `vite-plus`（VoidZero 统一工具链：`vp dev/build/test/lint/fmt`，内置 Vitest、Oxlint、Oxfmt，不再引入 ESLint/Prettier/Jest） |
-| 框架 | React 19 + TypeScript（strict） |
-| UI | `@astryxdesign/core`（StyleX）+ 官方主题包，经 `astryx init` 接入 |
-| 路由 | TanStack Router（文件式路由，类型安全） |
-| HTTP | ky（统一实例封装） |
-| 服务端状态 | SWR（不引入 TanStack Query，避免双缓存体系） |
-| 客户端状态 | zustand + immer middleware |
-| Mock | MSW（Service Worker 拦截，开发环境默认开启） |
+| 层         | 选型                                                                                                                        |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------- |
+| 包管理     | pnpm（Node ≥ 22.13，写入 `.nvmrc` + `engines`）                                                                             |
+| 工具链     | `vite-plus`（VoidZero 统一工具链：`vp dev/build/test/lint/fmt`，内置 Vitest、Oxlint、Oxfmt，不再引入 ESLint/Prettier/Jest） |
+| 框架       | React 19 + TypeScript（strict）                                                                                             |
+| UI         | `@astryxdesign/core`（StyleX）+ 官方主题包，经 `astryx init` 接入                                                           |
+| 路由       | TanStack Router（文件式路由，类型安全）                                                                                     |
+| HTTP       | ky（统一实例封装）                                                                                                          |
+| 服务端状态 | SWR（不引入 TanStack Query，避免双缓存体系）                                                                                |
+| 客户端状态 | zustand + immer middleware                                                                                                  |
+| Mock       | MSW（Service Worker 拦截，开发环境默认开启）                                                                                |
 
 ## 核心约束：Astryx 组件优先
 
@@ -30,15 +30,15 @@
 
 ## 页面与组件映射
 
-| 页面 | 使用的 Astryx 组件 |
-|---|---|
-| 登录 `/login` | `Center` + `Card` + `FormLayout` + `Field` + `TextInput` + `Button` + `Banner`（错误提示） |
-| 布局壳 | `AppShell` + `SideNav`（含 `SideNavCollapseButton`）+ `TopNav`（含主题切换 `IconButton`、用户 `Avatar` + `DropdownMenu`） |
-| 仪表盘 `/` | `Grid` + `Card` + `Text` + `Badge` + `StatusDot`（统计卡片） |
-| 用户管理 `/users` | `Toolbar` + `TextInput`(搜索) + `Table` 系列 + `Pagination` + `Skeleton`(加载) + `EmptyState`(空态) |
-| 用户新建/编辑 | `Dialog` + `FormLayout` + `Field` + `TextInput` + `Selector` + `Switch` |
-| 删除确认 | `AlertDialog` |
-| 操作反馈 | `Toast` |
+| 页面              | 使用的 Astryx 组件                                                                                                        |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| 登录 `/login`     | `Center` + `Card` + `FormLayout` + `Field` + `TextInput` + `Button` + `Banner`（错误提示）                                |
+| 布局壳            | `AppShell` + `SideNav`（含 `SideNavCollapseButton`）+ `TopNav`（含主题切换 `IconButton`、用户 `Avatar` + `DropdownMenu`） |
+| 仪表盘 `/`        | `Grid` + `Card` + `Text` + `Badge` + `StatusDot`（统计卡片）                                                              |
+| 用户管理 `/users` | `Toolbar` + `TextInput`(搜索) + `Table` 系列 + `Pagination` + `Skeleton`(加载) + `EmptyState`(空态)                       |
+| 用户新建/编辑     | `Dialog` + `FormLayout` + `Field` + `TextInput` + `Selector` + `Switch`                                                   |
+| 删除确认          | `AlertDialog`                                                                                                             |
+| 操作反馈          | `Toast`                                                                                                                   |
 
 ## 目录结构
 

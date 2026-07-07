@@ -1,10 +1,10 @@
-import { SegmentedControl, SegmentedControlItem } from '@astryxdesign/core/SegmentedControl';
-import { useUiStore, type ThemeMode } from '../../stores/ui';
+import { SegmentedControl, SegmentedControlItem } from "@astryxdesign/core/SegmentedControl";
+import { useUiStore, type ThemeMode } from "../../stores/ui";
 
 const MODES: { value: ThemeMode; label: string }[] = [
-  { value: 'light', label: '亮色' },
-  { value: 'dark', label: '暗色' },
-  { value: 'system', label: '系统' },
+  { value: "light", label: "亮色" },
+  { value: "dark", label: "暗色" },
+  { value: "system", label: "系统" },
 ];
 
 export function ThemeModeControl() {

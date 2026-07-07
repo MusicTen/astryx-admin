@@ -1,6 +1,6 @@
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
-import { immer } from 'zustand/middleware/immer';
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
+import { immer } from "zustand/middleware/immer";
 
 export interface AuthUser {
   id: string;
@@ -31,6 +31,6 @@ export const useAuthStore = create<AuthState>()(
           state.user = null;
         }),
     })),
-    { name: 'astryx-admin-auth' },
+    { name: "astryx-admin-auth" },
   ),
 );

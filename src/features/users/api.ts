@@ -1,5 +1,5 @@
-import { http } from '../../lib/http';
-import type { User, UserInput, UserListParams, UserListResult } from './types';
+import { http } from "../../lib/http";
+import type { User, UserInput, UserListParams, UserListResult } from "./types";
 
 export function usersKey(params: UserListParams): string {
   const search = new URLSearchParams({
@@ -15,7 +15,7 @@ export function fetchUsers(params: UserListParams): Promise<UserListResult> {
 }
 
 export function createUser(input: UserInput): Promise<User> {
-  return http.post('users', { json: input }).json<User>();
+  return http.post("users", { json: input }).json<User>();
 }
 
 export function updateUser(id: string, input: UserInput): Promise<User> {

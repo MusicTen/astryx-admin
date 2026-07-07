@@ -1,11 +1,8 @@
 {
   "name": "astryx-admin",
-  "private": true,
   "version": "0.1.0",
+  "private": true,
   "type": "module",
-  "engines": {
-    "node": ">=22.13.0"
-  },
   "scripts": {
     "dev": "vp dev",
     "build": "vp build",
@@ -40,6 +37,9 @@
     "vite": "^8.1.3",
     "vite-plus": "^0.2.2",
     "vitest": "4.1.9"
+  },
+  "engines": {
+    "node": ">=22.13.0"
   },
   "msw": {
     "workerDirectory": [

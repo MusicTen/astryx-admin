@@ -1,4 +1,4 @@
-export type UserRole = 'admin' | 'editor' | 'viewer';
+export type UserRole = "admin" | "editor" | "viewer";
 
 export interface User {
   id: string;
@@ -9,7 +9,7 @@ export interface User {
   createdAt: string;
 }
 
-export type UserInput = Omit<User, 'id' | 'createdAt'>;
+export type UserInput = Omit<User, "id" | "createdAt">;
 
 export interface UserListParams {
   page: number;

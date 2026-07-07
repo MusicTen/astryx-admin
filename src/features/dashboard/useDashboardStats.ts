@@ -1,4 +1,4 @@
-import useSWR from 'swr';
+import useSWR from "swr";
 
 export interface DashboardStats {
   userTotal: number;
@@ -8,6 +8,6 @@ export interface DashboardStats {
 }
 
 export function useDashboardStats() {
-  const { data, isLoading } = useSWR<DashboardStats>('dashboard/stats');
+  const { data, isLoading } = useSWR<DashboardStats>("dashboard/stats");
   return { stats: data, isLoading };
 }

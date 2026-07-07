@@ -1,19 +1,19 @@
-import { Card } from '@astryxdesign/core/Card';
-import { Grid } from '@astryxdesign/core/Grid';
-import { Skeleton } from '@astryxdesign/core/Skeleton';
-import { Stack } from '@astryxdesign/core/Stack';
-import { Text } from '@astryxdesign/core/Text';
-import { useDashboardStats, type DashboardStats } from './useDashboardStats';
+import { Card } from "@astryxdesign/core/Card";
+import { Grid } from "@astryxdesign/core/Grid";
+import { Skeleton } from "@astryxdesign/core/Skeleton";
+import { Stack } from "@astryxdesign/core/Stack";
+import { Text } from "@astryxdesign/core/Text";
+import { useDashboardStats, type DashboardStats } from "./useDashboardStats";
 
 const CARDS: {
   key: keyof DashboardStats;
   title: string;
-  variant: 'blue' | 'green' | 'purple' | 'red';
+  variant: "blue" | "green" | "purple" | "red";
 }[] = [
-  { key: 'userTotal', title: '用户总数', variant: 'blue' },
-  { key: 'activeToday', title: '今日活跃', variant: 'green' },
-  { key: 'orderTotal', title: '订单总数', variant: 'purple' },
-  { key: 'errorCount', title: '今日告警', variant: 'red' },
+  { key: "userTotal", title: "用户总数", variant: "blue" },
+  { key: "activeToday", title: "今日活跃", variant: "green" },
+  { key: "orderTotal", title: "订单总数", variant: "purple" },
+  { key: "errorCount", title: "今日告警", variant: "red" },
 ];
 
 export function StatCards() {
