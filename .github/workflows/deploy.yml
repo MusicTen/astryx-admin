@@ -31,7 +31,7 @@ jobs:
 
       - run: pnpm build
         env:
-          GITHUB_PAGES: "true"
+          VITE_GITHUB_PAGES: "true"
 
       # SPA 客户端路由：深链接刷新时用 404.html 兜底回落到 index.html
       - run: cp dist/index.html dist/404.html

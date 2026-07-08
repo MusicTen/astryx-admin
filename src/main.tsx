@@ -15,7 +15,8 @@ declare module "@tanstack/react-router" {
 }
 
 async function enableMocking() {
-  if (!import.meta.env.DEV) return;
+  // demo 部署（GitHub Pages）没有真实后端，也要用 mock 数据
+  if (!import.meta.env.DEV && !import.meta.env.VITE_GITHUB_PAGES) return;
   const { worker } = await import("./mocks/browser");
   await worker.start({ onUnhandledRequest: "bypass" });
 }

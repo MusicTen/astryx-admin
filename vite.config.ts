@@ -9,7 +9,8 @@ const cssAlias = (spec: string) =>
   fileURLToPath(new URL(`./node_modules/${spec}`, import.meta.url));
 
 // GitHub Pages 项目页部署在 /<repo>/ 子路径下，本地开发和 preview 仍用根路径
-const base = process.env.GITHUB_PAGES ? "/astryx-admin/" : "/";
+// VITE_ 前缀会被 Vite 透传给客户端 import.meta.env，main.tsx 用它判断要不要在生产构建里也开 mock（demo 没有真实后端）
+const base = process.env.VITE_GITHUB_PAGES ? "/astryx-admin/" : "/";
 
 export default defineConfig({
   base,
