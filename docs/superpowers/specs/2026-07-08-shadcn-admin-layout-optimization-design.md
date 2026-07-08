@@ -36,26 +36,26 @@ Astryx `Icon` / `SideNavItem` 的 `icon`、`selectedIcon` 属性类型是 `Compo
 
 `TopNav` 的 `startContent` 插槽用于放 `Breadcrumbs`。按 Astryx 官方最佳实践"顶层页面（无父级）不展示面包屑"：
 
-| 路由 | 面包屑 |
-|---|---|
-| `/`（仪表盘） | 不显示 |
-| `/users` | 用户管理 |
-| `/settings/profile` | 系统设置 / 个人资料 |
-| `/settings/appearance` | 系统设置 / 外观 |
+| 路由                   | 面包屑              |
+| ---------------------- | ------------------- |
+| `/`（仪表盘）          | 不显示              |
+| `/users`               | 用户管理            |
+| `/settings/profile`    | 系统设置 / 个人资料 |
+| `/settings/appearance` | 系统设置 / 外观     |
 
 用一张 `pathname → crumbs` 的静态映射表实现（路由总共 4 个，没必要写通用路径解析器，符合 YAGNI）。
 
 ## 文件改动
 
-| 文件 | 改动 |
-|---|---|
-| `package.json` | 新增依赖 `lucide-react` |
-| `src/components/layout/AdminShell.tsx` | 侧边栏改为分组+图标+嵌套子菜单；TopNav `startContent` 接入面包屑 |
-| `src/components/layout/PageBreadcrumbs.tsx`（新增） | pathname → `Breadcrumbs` 映射组件 |
-| `src/routes/_auth/settings/profile.tsx`（新增） | 个人资料页路由 |
-| `src/routes/_auth/settings/appearance.tsx`（新增） | 外观设置页路由 |
-| `src/features/settings/ProfileCard.tsx`（新增） | 个人资料卡片：用户信息 + 退出登录 |
-| `src/features/settings/AppearanceCard.tsx`（新增） | 外观设置卡片：承载 `ThemeModeControl` |
+| 文件                                                | 改动                                                             |
+| --------------------------------------------------- | ---------------------------------------------------------------- |
+| `package.json`                                      | 新增依赖 `lucide-react`                                          |
+| `src/components/layout/AdminShell.tsx`              | 侧边栏改为分组+图标+嵌套子菜单；TopNav `startContent` 接入面包屑 |
+| `src/components/layout/PageBreadcrumbs.tsx`（新增） | pathname → `Breadcrumbs` 映射组件                                |
+| `src/routes/_auth/settings/profile.tsx`（新增）     | 个人资料页路由                                                   |
+| `src/routes/_auth/settings/appearance.tsx`（新增）  | 外观设置页路由                                                   |
+| `src/features/settings/ProfileCard.tsx`（新增）     | 个人资料卡片：用户信息 + 退出登录                                |
+| `src/features/settings/AppearanceCard.tsx`（新增）  | 外观设置卡片：承载 `ThemeModeControl`                            |
 
 ## 测试
 
