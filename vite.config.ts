@@ -8,7 +8,11 @@ import { tanstackRouter } from "@tanstack/router-plugin/vite";
 const cssAlias = (spec: string) =>
   fileURLToPath(new URL(`./node_modules/${spec}`, import.meta.url));
 
+// GitHub Pages 项目页部署在 /<repo>/ 子路径下，本地开发和 preview 仍用根路径
+const base = process.env.GITHUB_PAGES ? "/astryx-admin/" : "/";
+
 export default defineConfig({
+  base,
   test: {
     environment: "happy-dom",
   },
