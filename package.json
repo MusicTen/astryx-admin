@@ -4,6 +4,7 @@
   "private": true,
   "license": "MIT",
   "author": "MusicTen",
+  "packageManager": "pnpm@11.10.0",
   "type": "module",
   "scripts": {
     "dev": "vp dev",
