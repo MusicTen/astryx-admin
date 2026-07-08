@@ -3,5 +3,7 @@ dist
 coverage
 *.local
 .DS_Store
+.tanstack
 src/routeTree.gen.ts
 public/mockServiceWorker.js
+.claude/settings.local.json
