@@ -1,10 +1,10 @@
 import { forwardRef, type ComponentPropsWithoutRef, type ReactNode } from "react";
 import { Theme } from "@astryxdesign/core";
 import { LinkProvider } from "@astryxdesign/core/Link";
-import { neutralTheme } from "@astryxdesign/theme-neutral/built";
 import { Link as RouterLink } from "@tanstack/react-router";
 import { SwrProvider } from "../lib/swr";
 import { useUiStore } from "../stores/ui";
+import { appTheme } from "../theme/appTheme";
 
 const AppLink = forwardRef<HTMLAnchorElement, ComponentPropsWithoutRef<"a">>(function AppLink(
   { href, children, ...rest },
@@ -20,7 +20,7 @@ const AppLink = forwardRef<HTMLAnchorElement, ComponentPropsWithoutRef<"a">>(fun
 export function AppProviders({ children }: { children: ReactNode }) {
   const themeMode = useUiStore((state) => state.themeMode);
   return (
-    <Theme theme={neutralTheme} mode={themeMode}>
+    <Theme theme={appTheme} mode={themeMode}>
       <LinkProvider component={AppLink}>
         <SwrProvider>{children}</SwrProvider>
       </LinkProvider>
