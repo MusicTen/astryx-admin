@@ -4,8 +4,9 @@ import { SideNav, SideNavItem, SideNavSection } from "@astryxdesign/core/SideNav
 import { Stack } from "@astryxdesign/core/Stack";
 import { TopNav, TopNavHeading } from "@astryxdesign/core/TopNav";
 import { useRouterState } from "@tanstack/react-router";
-import { LayoutDashboard, Palette, Settings, UserCircle, Users } from "lucide-react";
+import { Blocks, KanbanSquare, LayoutDashboard, Palette, Settings, UserCircle, Users } from "lucide-react";
 import { useUiStore } from "../../stores/ui";
+import "./admin-shell.css";
 import { PageBreadcrumbs } from "./PageBreadcrumbs";
 import { ThemeModeControl } from "./ThemeModeControl";
 import { UserMenu } from "./UserMenu";
@@ -44,6 +45,22 @@ export function AdminShell({ children }: { children: ReactNode }) {
               icon={LayoutDashboard}
               selectedIcon={LayoutDashboard}
               isSelected={pathname === "/"}
+            />
+          </SideNavSection>
+          <SideNavSection title="工作">
+            <SideNavItem
+              label="任务看板"
+              href="/tasks"
+              icon={KanbanSquare}
+              selectedIcon={KanbanSquare}
+              isSelected={pathname === "/tasks"}
+            />
+            <SideNavItem
+              label="应用集成"
+              href="/apps"
+              icon={Blocks}
+              selectedIcon={Blocks}
+              isSelected={pathname === "/apps"}
             />
           </SideNavSection>
           <SideNavSection title="管理">

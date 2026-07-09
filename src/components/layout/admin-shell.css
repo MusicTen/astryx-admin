@@ -1,0 +1,12 @@
+/* SideNavItem 的嵌套子项容器（astryx 内部用 role="group" 渲染，不支持 className/style），
+   紧邻的非 hidden 子项之间加个垂直间距；跳过第一个（隐藏的可访问性 label span）避免顶部多出空隙 */
+[role="group"] > div > *:not([hidden]) + *:not([hidden]) {
+  margin-top: var(--spacing-1);
+}
+
+/* SideNav 底部 sticky 区域（折叠按钮所在盒子）收起时库内部把 padding-top 置 0，
+   保持与展开态一致仍为 var(--spacing-1)。StyleX 原子类选择器带 4 层 :not(#\#)
+   抬高特异性，普通选择器覆盖不了，只能用 !important */
+.astryx-side-nav > div:last-child {
+  padding-top: var(--spacing-1) !important;
+}
