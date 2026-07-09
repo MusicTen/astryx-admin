@@ -4,7 +4,7 @@ import react from "@vitejs/plugin-react";
 import { astryxStylex } from "@astryxdesign/build/vite";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
 
-// rolldown 对 css exports 的 types 条件解析有误，直接指向 dist 实际文件
+// rolldown 对 css exports 的 types 条件解析有误，直接指向 dist 实际文件（vite-plus 0.2.4 仍未修复）
 const cssAlias = (spec: string) =>
   fileURLToPath(new URL(`./node_modules/${spec}`, import.meta.url));
 
