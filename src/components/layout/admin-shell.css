@@ -4,6 +4,14 @@
   margin-top: var(--spacing-1);
 }
 
+/* SideNav 收起后 hover 带子路由项 icon 出现的路由弹窗：去掉包裹子路由盒子
+   （popoverSurface，即 dialog 的直接子 div）的边框。用 aria-label 后缀限定
+   （usePopover 的 dialogLabel 固定为 "{label} submenu"），避免影响 Modal 等
+   其他 role="dialog" 组件；StyleX 原子类特异性高，需 !important */
+div[role="dialog"][aria-label$="submenu"] > div {
+  border: none !important;
+}
+
 /* SideNav 底部 sticky 区域（折叠按钮所在盒子）收起时库内部把 padding-top 置 0，
    保持与展开态一致仍为 var(--spacing-1)。StyleX 原子类选择器带 4 层 :not(#\#)
    抬高特异性，普通选择器覆盖不了，只能用 !important */
