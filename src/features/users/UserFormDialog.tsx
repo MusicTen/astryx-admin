@@ -4,9 +4,8 @@ import { Dialog, DialogHeader } from "@astryxdesign/core/Dialog";
 import { FormLayout } from "@astryxdesign/core/FormLayout";
 import { Selector } from "@astryxdesign/core/Selector";
 import { Stack } from "@astryxdesign/core/Stack";
-import { Switch } from "@astryxdesign/core/Switch";
 import { TextInput } from "@astryxdesign/core/TextInput";
-import type { User, UserInput, UserRole } from "./types";
+import type { User, UserInput, UserRole, UserStatus } from "./types";
 
 const ROLE_OPTIONS = [
   { label: "管理员", value: "admin" },
@@ -14,7 +13,20 @@ const ROLE_OPTIONS = [
   { label: "访客", value: "viewer" },
 ];
 
-const EMPTY: UserInput = { name: "", email: "", role: "viewer", isActive: true };
+const STATUS_OPTIONS = [
+  { label: "启用", value: "active" },
+  { label: "停用", value: "suspended" },
+  { label: "已邀请", value: "invited" },
+];
+
+const EMPTY: UserInput = {
+  username: "",
+  name: "",
+  email: "",
+  phone: "",
+  role: "viewer",
+  status: "invited",
+};
 
 interface UserFormDialogProps {
   isOpen: boolean;
@@ -38,10 +50,12 @@ export function UserFormDialog({
       setForm(
         editingUser
           ? {
+              username: editingUser.username,
               name: editingUser.name,
               email: editingUser.email,
+              phone: editingUser.phone,
               role: editingUser.role,
-              isActive: editingUser.isActive,
+              status: editingUser.status,
             }
           : EMPTY,
       );
@@ -50,9 +64,15 @@ export function UserFormDialog({
 
   return (
     <Dialog isOpen={isOpen} onOpenChange={onOpenChange} purpose="form" width={480}>
-      <DialogHeader title={editingUser ? "编辑用户" : "新建用户"} onOpenChange={onOpenChange} />
+      <DialogHeader title={editingUser ? "编辑用户" : "添加用户"} onOpenChange={onOpenChange} />
       <Stack direction="vertical" gap={4}>
         <FormLayout direction="vertical">
+          <TextInput
+            label="用户名"
+            value={form.username}
+            changeAction={(username) => setForm((f) => ({ ...f, username }))}
+            isRequired
+          />
           <TextInput
             label="姓名"
             value={form.name}
@@ -66,16 +86,22 @@ export function UserFormDialog({
             changeAction={(email) => setForm((f) => ({ ...f, email }))}
             isRequired
           />
+          <TextInput
+            label="手机号码"
+            value={form.phone}
+            changeAction={(phone) => setForm((f) => ({ ...f, phone }))}
+          />
           <Selector
             label="角色"
             options={ROLE_OPTIONS}
             value={form.role}
             onChange={(role) => setForm((f) => ({ ...f, role: role as UserRole }))}
           />
-          <Switch
-            label="启用"
-            value={form.isActive}
-            changeAction={(isActive) => setForm((f) => ({ ...f, isActive }))}
+          <Selector
+            label="状态"
+            options={STATUS_OPTIONS}
+            value={form.status}
+            onChange={(status) => setForm((f) => ({ ...f, status: status as UserStatus }))}
           />
         </FormLayout>
         <Stack direction="horizontal" gap={2}>
@@ -84,7 +110,7 @@ export function UserFormDialog({
             label={editingUser ? "保存" : "创建"}
             variant="primary"
             isLoading={isSubmitting}
-            isDisabled={!form.name || !form.email}
+            isDisabled={!form.username || !form.name || !form.email}
             clickAction={() => onSubmit(form)}
           />
         </Stack>

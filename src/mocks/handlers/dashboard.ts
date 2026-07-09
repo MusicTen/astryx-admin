@@ -6,7 +6,7 @@ export const dashboardHandlers = [
   http.get("*/api/dashboard/stats", () =>
     HttpResponse.json({
       userTotal: users.length,
-      activeToday: users.filter((u) => u.isActive).length,
+      activeToday: users.filter((u) => u.status === "active").length,
       orderTotal: 1280,
       errorCount: 3,
     }),

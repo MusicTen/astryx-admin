@@ -9,10 +9,12 @@ afterAll(() => server.close());
 
 test("用户 CRUD 全链路", async () => {
   const created = await createUser({
+    username: "test.user",
     name: "测试用户",
     email: "t@example.com",
+    phone: "+12025550100",
     role: "viewer",
-    isActive: true,
+    status: "active",
   });
   expect(created.id).toBeTruthy();
 

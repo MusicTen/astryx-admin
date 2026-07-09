@@ -1,11 +1,14 @@
 export type UserRole = "admin" | "editor" | "viewer";
+export type UserStatus = "active" | "suspended" | "invited";
 
 export interface User {
   id: string;
+  username: string;
   name: string;
   email: string;
+  phone: string;
   role: UserRole;
-  isActive: boolean;
+  status: UserStatus;
   createdAt: string;
 }
 
@@ -15,6 +18,8 @@ export interface UserListParams {
   page: number;
   pageSize: number;
   keyword: string;
+  statuses?: UserStatus[];
+  roles?: UserRole[];
 }
 
 export interface UserListResult {

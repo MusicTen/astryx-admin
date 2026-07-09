@@ -10,9 +10,25 @@ export const userHandlers = [
     const page = Number(url.searchParams.get("page") ?? "1");
     const pageSize = Number(url.searchParams.get("pageSize") ?? "10");
     const keyword = url.searchParams.get("keyword") ?? "";
-    const filtered = keyword
-      ? users.filter((u) => u.name.includes(keyword) || u.email.includes(keyword))
-      : users;
+    const statuses = url.searchParams.getAll("status");
+    const roles = url.searchParams.getAll("role");
+
+    let filtered = users;
+    if (keyword) {
+      filtered = filtered.filter(
+        (u) =>
+          u.name.includes(keyword) ||
+          u.email.includes(keyword) ||
+          u.username.includes(keyword),
+      );
+    }
+    if (statuses.length > 0) {
+      filtered = filtered.filter((u) => statuses.includes(u.status));
+    }
+    if (roles.length > 0) {
+      filtered = filtered.filter((u) => roles.includes(u.role));
+    }
+
     const start = (page - 1) * pageSize;
     return HttpResponse.json({
       items: filtered.slice(start, start + pageSize),

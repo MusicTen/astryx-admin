@@ -7,6 +7,12 @@ export function usersKey(params: UserListParams): string {
     pageSize: String(params.pageSize),
     keyword: params.keyword,
   });
+  for (const status of params.statuses ?? []) {
+    search.append("status", status);
+  }
+  for (const role of params.roles ?? []) {
+    search.append("role", role);
+  }
   return `users?${search.toString()}`;
 }
 
