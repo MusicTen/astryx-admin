@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Center } from "@astryxdesign/core/Center";
 import { LoginForm } from "../features/auth/LoginForm";
+import "../features/auth/login-background.css";
 
 interface LoginSearch {
   redirect?: string;
@@ -17,7 +18,7 @@ function LoginPage() {
   const navigate = useNavigate();
   const { redirect } = Route.useSearch();
   return (
-    <Center axis="both" minHeight="100dvh">
+    <Center axis="both" minHeight="100dvh" className="login-page-background">
       <LoginForm onSuccess={() => void navigate({ to: redirect ?? "/" })} />
     </Center>
   );

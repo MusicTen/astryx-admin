@@ -1,0 +1,9 @@
+/* 分层渐变背景：用主题已有的 background-blue/purple/cyan 语义色块
+   （已针对亮暗色做过透明度调优）叠出柔和的科技感光晕，不引入新硬编码色值 */
+.login-page-background {
+  background-color: var(--color-background-body);
+  background-image:
+    radial-gradient(ellipse 60% 50% at 12% 15%, var(--color-background-blue), transparent 60%),
+    radial-gradient(ellipse 55% 45% at 88% 12%, var(--color-background-purple), transparent 60%),
+    radial-gradient(ellipse 60% 55% at 50% 105%, var(--color-background-cyan), transparent 65%);
+}
