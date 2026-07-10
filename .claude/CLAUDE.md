@@ -4,7 +4,6 @@ Project-specific guidance for AI coding agents.
 
 <!-- ASTRYX:START -->
 
-Astryx v0.1.3 · 149 components
 CLI: run every command as `pnpm exec astryx <cmd>` (shown below as `astryx ...`).
 
 SETUP (once, in your app entry e.g. main.tsx) — without these, components render unstyled:
