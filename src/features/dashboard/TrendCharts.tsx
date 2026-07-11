@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Card } from "@astryxdesign/core/Card";
 import { Skeleton } from "@astryxdesign/core/Skeleton";
 import { Text } from "@astryxdesign/core/Text";
@@ -6,6 +7,7 @@ import { useDashboardTrend } from "./useDashboardTrend";
 
 export function TrendCharts() {
   const { trend, isLoading } = useDashboardTrend();
+  const { t } = useTranslation();
 
   if (isLoading || !trend) {
     return (
@@ -17,7 +19,7 @@ export function TrendCharts() {
 
   return (
     <Card padding={4}>
-      <Text type="large">概览</Text>
+      <Text type="large">{t("dashboard.trends.title")}</Text>
       <ResponsiveContainer width="100%" height={300}>
         <BarChart data={trend.revenue} margin={{ top: 16, right: 8, left: 0, bottom: 0 }}>
           <CartesianGrid vertical={false} strokeDasharray="3 3" />
@@ -30,7 +32,7 @@ export function TrendCharts() {
             tickFormatter={(value: number) => `¥${Math.round(value / 1000)}k`}
           />
           <Tooltip />
-          <Bar dataKey="revenue" name="营收" fill="var(--color-accent)" radius={[4, 4, 0, 0]} />
+          <Bar dataKey="revenue" name={t("dashboard.trends.revenue")} fill="var(--color-accent)" radius={[4, 4, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
     </Card>

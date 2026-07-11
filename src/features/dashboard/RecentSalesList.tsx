@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Avatar } from "@astryxdesign/core/Avatar";
 import { Card } from "@astryxdesign/core/Card";
 import { EmptyState } from "@astryxdesign/core/EmptyState";
@@ -10,14 +11,15 @@ const SALE_AMOUNTS = [1999, 39, 299, 99, 39];
 
 export function RecentSalesList() {
   const { users, total, isLoading } = useUsers({ page: 1, pageSize: 5, keyword: "" });
+  const { t } = useTranslation();
 
   return (
     <Card padding={4}>
       <Stack direction="vertical" gap={4}>
         <Stack direction="vertical" gap={1}>
-          <Text type="large">最近销售</Text>
+          <Text type="large">{t("dashboard.recentSales.title")}</Text>
           <Text type="supporting" color="secondary">
-            本月共成交 {total} 笔
+            {t("dashboard.recentSales.summary", { count: total })}
           </Text>
         </Stack>
         {isLoading ? (
@@ -27,7 +29,7 @@ export function RecentSalesList() {
             <Skeleton height={40} />
           </Stack>
         ) : users.length === 0 ? (
-          <EmptyState title="暂无销售记录" description="产生新订单后会显示在这里" />
+          <EmptyState title={t("dashboard.recentSales.emptyTitle")} description={t("dashboard.recentSales.emptyDescription")} />
         ) : (
           <Stack direction="vertical" gap={4}>
             {users.map((user, index) => (

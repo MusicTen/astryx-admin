@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Banner } from "@astryxdesign/core/Banner";
 import { Button } from "@astryxdesign/core/Button";
 import { Card } from "@astryxdesign/core/Card";
@@ -11,6 +12,7 @@ import { useAuthStore } from "../../stores/auth";
 import { login } from "./api";
 
 export function LoginForm({ onSuccess }: { onSuccess: () => void }) {
+  const { t } = useTranslation();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -25,7 +27,7 @@ export function LoginForm({ onSuccess }: { onSuccess: () => void }) {
       saveAuth(result.token, result.user);
       onSuccess();
     } catch (error) {
-      setErrorMessage(error instanceof ApiError ? error.message : "登录失败，请稍后重试");
+      setErrorMessage(error instanceof ApiError ? error.message : t("login.failed"));
     } finally {
       setIsLoading(false);
     }
@@ -36,13 +38,13 @@ export function LoginForm({ onSuccess }: { onSuccess: () => void }) {
       <Stack direction="vertical" gap={4}>
         <Text type="display-3">Astryx Admin</Text>
         <Text type="supporting" color="secondary">
-          演示账号：任意用户名 / admin123
+          {t("login.demoHint")}
         </Text>
         {errorMessage ? <Banner status="error" title={errorMessage} /> : null}
         <FormLayout direction="vertical">
-          <TextInput label="用户名" value={username} changeAction={setUsername} isRequired />
+          <TextInput label={t("login.username")} value={username} changeAction={setUsername} isRequired />
           <TextInput
-            label="密码"
+            label={t("login.password")}
             type="password"
             value={password}
             changeAction={setPassword}
@@ -50,7 +52,7 @@ export function LoginForm({ onSuccess }: { onSuccess: () => void }) {
           />
         </FormLayout>
         <Button
-          label="登录"
+          label={t("login.submit")}
           variant="primary"
           isLoading={isLoading}
           isDisabled={!username || !password}

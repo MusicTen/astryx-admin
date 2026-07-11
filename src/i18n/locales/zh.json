@@ -1,0 +1,197 @@
+{
+  "common": {
+    "cancel": "取消",
+    "delete": "删除",
+    "edit": "编辑",
+    "save": "保存",
+    "create": "创建",
+    "actionFailed": "操作失败，请稍后重试",
+    "deleteFailed": "删除失败，请稍后重试"
+  },
+  "nav": {
+    "sectionOverview": "概览",
+    "sectionWork": "工作",
+    "sectionManagement": "管理",
+    "dashboard": "仪表盘",
+    "tasks": "任务看板",
+    "apps": "应用集成",
+    "users": "用户管理",
+    "settings": "系统设置",
+    "profile": "个人资料",
+    "appearance": "外观"
+  },
+  "userMenu": {
+    "account": "账号",
+    "profile": "个人资料",
+    "appearanceSettings": "外观设置",
+    "logout": "退出登录"
+  },
+  "theme": {
+    "label": "主题模式",
+    "light": "亮色",
+    "dark": "暗色",
+    "system": "系统"
+  },
+  "language": {
+    "label": "语言"
+  },
+  "login": {
+    "demoHint": "演示账号：任意用户名 / admin123",
+    "username": "用户名",
+    "password": "密码",
+    "submit": "登录",
+    "failed": "登录失败，请稍后重试"
+  },
+  "dashboard": {
+    "title": "仪表盘",
+    "tabs": {
+      "overview": "概览",
+      "analytics": "分析",
+      "reports": "报表",
+      "notifications": "通知"
+    },
+    "comingSoon": {
+      "title": "暂未开放",
+      "description": "该页签的内容尚未实现"
+    },
+    "stats": {
+      "userTotal": "用户总数",
+      "userTotalTrend": "较上月 +12.4%",
+      "orderTotal": "订单总数",
+      "orderTotalTrend": "较上月 +19%",
+      "activeToday": "今日活跃",
+      "activeTodayTrend": "较昨日 +8.2%",
+      "errorCount": "今日告警",
+      "errorCountTrend": "较昨日 -2 起"
+    },
+    "trends": {
+      "title": "概览",
+      "revenue": "营收"
+    },
+    "recentSales": {
+      "title": "最近销售",
+      "summary": "本月共成交 {{count}} 笔",
+      "emptyTitle": "暂无销售记录",
+      "emptyDescription": "产生新订单后会显示在这里"
+    }
+  },
+  "tasks": {
+    "title": "任务看板",
+    "status": {
+      "backlog": "待办",
+      "inProgress": "进行中",
+      "inReview": "评审中",
+      "done": "已完成"
+    },
+    "priority": {
+      "urgent": "紧急",
+      "high": "高",
+      "medium": "中",
+      "low": "低"
+    },
+    "actionsLabel": "任务操作",
+    "new": "新建任务",
+    "updated": "任务已更新",
+    "created": "任务已创建",
+    "deleted": "任务已删除",
+    "moveFailed": "移动任务失败，请稍后重试",
+    "emptyTitle": "暂无任务",
+    "emptyDescription": "点击右上角新建任务",
+    "unassigned": "未分配",
+    "deleteDialog": {
+      "title": "删除任务",
+      "description": "确定删除「{{title}}」吗？此操作不可撤销。"
+    },
+    "form": {
+      "editTitle": "编辑任务",
+      "createTitle": "新建任务",
+      "title": "标题",
+      "status": "状态",
+      "priority": "优先级",
+      "assignee": "负责人",
+      "tags": "标签（逗号分隔）"
+    }
+  },
+  "users": {
+    "title": "用户列表",
+    "subtitle": "在这里管理用户及其角色",
+    "pageHeaderLabel": "用户页面标题",
+    "role": {
+      "admin": "管理员",
+      "editor": "编辑",
+      "viewer": "访客"
+    },
+    "status": {
+      "active": "启用",
+      "suspended": "停用",
+      "invited": "已邀请"
+    },
+    "updated": "用户已更新",
+    "created": "用户已创建",
+    "deleted": "用户已删除",
+    "batchDeleted": "已删除 {{count}} 个用户",
+    "batchDeleteFailed": "批量删除失败，请稍后重试",
+    "columns": {
+      "username": "用户名",
+      "name": "姓名",
+      "email": "邮箱",
+      "phone": "手机号码",
+      "status": "状态",
+      "role": "角色",
+      "actions": "操作"
+    },
+    "actionsLabel": "用户操作",
+    "invite": "邀请用户",
+    "inviteComingSoon": "邀请功能开发中，敬请期待",
+    "add": "添加用户",
+    "filterLabel": "用户筛选",
+    "search": "搜索",
+    "searchPlaceholder": "按用户名/姓名/邮箱搜索",
+    "batchDelete": "批量删除 ({{count}})",
+    "emptyTitle": "暂无用户",
+    "emptyDescription": "调整筛选条件，或点击右上角添加用户",
+    "paginationLabel": "用户列表分页",
+    "deleteDialog": {
+      "title": "删除用户",
+      "description": "确定删除「{{name}}」吗？此操作不可撤销。"
+    },
+    "batchDeleteDialog": {
+      "title": "批量删除用户",
+      "description": "确定删除选中的 {{count}} 个用户吗？此操作不可撤销。"
+    },
+    "form": {
+      "editTitle": "编辑用户",
+      "addTitle": "添加用户"
+    }
+  },
+  "apps": {
+    "title": "应用集成",
+    "filterLabel": "按分类筛选",
+    "categories": {
+      "all": "全部",
+      "collaboration": "沟通协作",
+      "devtools": "开发工具",
+      "payment": "支付",
+      "automation": "自动化",
+      "analytics": "数据分析"
+    },
+    "connected": "已连接",
+    "disconnected": "已断开连接",
+    "emptyTitle": "没有匹配的应用",
+    "emptyDescription": "切换分类查看其他应用"
+  },
+  "settings": {
+    "appearance": {
+      "pageTitle": "外观设置",
+      "cardTitle": "外观",
+      "cardDescription": "调整界面的主题模式与语言"
+    },
+    "profile": {
+      "pageTitle": "个人资料",
+      "notLoggedIn": "未登录"
+    }
+  },
+  "errors": {
+    "requestFailed": "请求失败（HTTP {{status}}）"
+  }
+}

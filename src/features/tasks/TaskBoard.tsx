@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import type { DragEvent } from "react";
+import { useTranslation } from "react-i18next";
 import { AlertDialog } from "@astryxdesign/core/AlertDialog";
 import { Badge } from "@astryxdesign/core/Badge";
 import { Button } from "@astryxdesign/core/Button";
@@ -20,14 +21,15 @@ import { TaskFormDialog } from "./TaskFormDialog";
 import { useTasks } from "./useTasks";
 import type { Task, TaskInput, TaskStatus } from "./types";
 
-const STATUS_LABEL: Record<TaskStatus, string> = {
-  backlog: "待办",
-  "in-progress": "进行中",
-  "in-review": "评审中",
-  done: "已完成",
+const STATUS_LABEL_KEYS: Record<TaskStatus, string> = {
+  backlog: "tasks.status.backlog",
+  "in-progress": "tasks.status.inProgress",
+  "in-review": "tasks.status.inReview",
+  done: "tasks.status.done",
 };
 
 export function TaskBoard() {
+  const { t } = useTranslation();
   const { tasks, isLoading, refresh } = useTasks();
   const { users } = useUsers({ page: 1, pageSize: 100, keyword: "" });
   const [isFormOpen, setFormOpen] = useState(false);
@@ -49,15 +51,15 @@ export function TaskBoard() {
     try {
       if (editingTask) {
         await updateTask(editingTask.id, input);
-        toast({ body: "任务已更新" });
+        toast({ body: t("tasks.updated") });
       } else {
         await createTask(input);
-        toast({ body: "任务已创建" });
+        toast({ body: t("tasks.created") });
       }
       setFormOpen(false);
       await refresh();
     } catch (error) {
-      notifyError(error, "操作失败，请稍后重试");
+      notifyError(error, t("common.actionFailed"));
     } finally {
       setSubmitting(false);
     }
@@ -67,11 +69,11 @@ export function TaskBoard() {
     if (!deletingTask) return;
     try {
       await deleteTask(deletingTask.id);
-      toast({ body: "任务已删除" });
+      toast({ body: t("tasks.deleted") });
       setDeletingTask(null);
       await refresh();
     } catch (error) {
-      notifyError(error, "删除失败，请稍后重试");
+      notifyError(error, t("common.deleteFailed"));
     }
   };
 
@@ -84,17 +86,17 @@ export function TaskBoard() {
       await updateTask(task.id, { status });
       await refresh();
     } catch (error) {
-      notifyError(error, "移动任务失败，请稍后重试");
+      notifyError(error, t("tasks.moveFailed"));
     }
   };
 
   return (
     <Stack direction="vertical" gap={4}>
       <Toolbar
-        label="任务操作"
+        label={t("tasks.actionsLabel")}
         endContent={
           <Button
-            label="新建任务"
+            label={t("tasks.new")}
             variant="primary"
             clickAction={() => {
               setEditingTask(null);
@@ -112,7 +114,7 @@ export function TaskBoard() {
           <Skeleton height={320} />
         </Grid>
       ) : tasks.length === 0 ? (
-        <EmptyState title="暂无任务" description="点击右上角新建任务" />
+        <EmptyState title={t("tasks.emptyTitle")} description={t("tasks.emptyDescription")} />
       ) : (
         <Grid columns={4} gap={4}>
           {TASK_STATUSES.map((status) => (
@@ -128,7 +130,7 @@ export function TaskBoard() {
             >
               <Stack direction="vertical" gap={3}>
                 <Stack direction="horizontal" gap={2}>
-                  <Text type="large">{STATUS_LABEL[status]}</Text>
+                  <Text type="large">{t(STATUS_LABEL_KEYS[status])}</Text>
                   <Badge label={String(groups[status].length)} variant="neutral" />
                 </Stack>
                 <Stack direction="vertical" gap={2}>
@@ -136,7 +138,7 @@ export function TaskBoard() {
                     <TaskCard
                       key={task.id}
                       task={task}
-                      assigneeName={userNameById.get(task.assigneeId) ?? "未分配"}
+                      assigneeName={userNameById.get(task.assigneeId) ?? t("tasks.unassigned")}
                       onDragStart={() => setDraggingId(task.id)}
                       onEdit={() => {
                         setEditingTask(task);
@@ -165,11 +167,11 @@ export function TaskBoard() {
         onOpenChange={(isOpen) => {
           if (!isOpen) setDeletingTask(null);
         }}
-        title="删除任务"
-        description={`确定删除「${deletingTask?.title ?? ""}」吗？此操作不可撤销。`}
-        actionLabel="删除"
+        title={t("tasks.deleteDialog.title")}
+        description={t("tasks.deleteDialog.description", { title: deletingTask?.title ?? "" })}
+        actionLabel={t("common.delete")}
         actionVariant="destructive"
-        cancelLabel="取消"
+        cancelLabel={t("common.cancel")}
         onAction={handleDelete}
       />
     </Stack>

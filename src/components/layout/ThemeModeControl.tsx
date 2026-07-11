@@ -1,24 +1,26 @@
 import { SegmentedControl, SegmentedControlItem } from "@astryxdesign/core/SegmentedControl";
+import { useTranslation } from "react-i18next";
 import { useUiStore, type ThemeMode } from "../../stores/ui";
 
-const MODES: { value: ThemeMode; label: string }[] = [
-  { value: "light", label: "亮色" },
-  { value: "dark", label: "暗色" },
-  { value: "system", label: "系统" },
+const MODES: { value: ThemeMode; labelKey: string }[] = [
+  { value: "light", labelKey: "theme.light" },
+  { value: "dark", labelKey: "theme.dark" },
+  { value: "system", labelKey: "theme.system" },
 ];
 
 export function ThemeModeControl() {
+  const { t } = useTranslation();
   const themeMode = useUiStore((state) => state.themeMode);
   const setThemeMode = useUiStore((state) => state.setThemeMode);
   return (
     <SegmentedControl
-      label="主题模式"
+      label={t("theme.label")}
       size="sm"
       value={themeMode}
       onChange={(value) => setThemeMode(value as ThemeMode)}
     >
       {MODES.map((mode) => (
-        <SegmentedControlItem key={mode.value} value={mode.value} label={mode.label} />
+        <SegmentedControlItem key={mode.value} value={mode.value} label={t(mode.labelKey)} />
       ))}
     </SegmentedControl>
   );

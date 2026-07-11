@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Badge } from "@astryxdesign/core/Badge";
 import { EmptyState } from "@astryxdesign/core/EmptyState";
 import { Grid } from "@astryxdesign/core/Grid";
@@ -44,15 +45,24 @@ const ICONS: Record<string, typeof MessageSquare> = {
   PieChart,
 };
 
-const CATEGORIES: (AppCategory | "全部")[] = ["全部", "沟通协作", "开发工具", "支付", "自动化", "数据分析"];
+const CATEGORY_LABEL_KEYS: Record<AppCategory, string> = {
+  "沟通协作": "apps.categories.collaboration",
+  "开发工具": "apps.categories.devtools",
+  "支付": "apps.categories.payment",
+  "自动化": "apps.categories.automation",
+  "数据分析": "apps.categories.analytics",
+};
+
+const CATEGORIES: AppCategory[] = ["沟通协作", "开发工具", "支付", "自动化", "数据分析"];
 
 export function AppsGrid() {
+  const { t } = useTranslation();
   const { apps, isLoading, refresh } = useIntegrations();
-  const [category, setCategory] = useState<AppCategory | "全部">("全部");
+  const [category, setCategory] = useState<AppCategory | "all">("all");
   const toast = useToast();
 
   const filtered = useMemo(
-    () => (category === "全部" ? apps : apps.filter((app) => app.category === category)),
+    () => (category === "all" ? apps : apps.filter((app) => app.category === category)),
     [apps, category],
   );
 
@@ -60,15 +70,15 @@ export function AppsGrid() {
     try {
       if (isConnected) {
         await disconnectIntegration(id);
-        toast({ body: "已断开连接" });
+        toast({ body: t("apps.disconnected") });
       } else {
         await connectIntegration(id);
-        toast({ body: "已连接" });
+        toast({ body: t("apps.connected") });
       }
       await refresh();
     } catch (error) {
       toast({
-        body: error instanceof ApiError ? error.message : "操作失败，请稍后重试",
+        body: error instanceof ApiError ? error.message : t("common.actionFailed"),
         type: "error",
       });
     }
@@ -77,12 +87,13 @@ export function AppsGrid() {
   return (
     <Stack direction="vertical" gap={4}>
       <SegmentedControl
-        label="按分类筛选"
+        label={t("apps.filterLabel")}
         value={category}
-        onChange={(value) => setCategory(value as AppCategory | "全部")}
+        onChange={(value) => setCategory(value as AppCategory | "all")}
       >
+        <SegmentedControlItem value="all" label={t("apps.categories.all")} />
         {CATEGORIES.map((item) => (
-          <SegmentedControlItem key={item} value={item} label={item} />
+          <SegmentedControlItem key={item} value={item} label={t(CATEGORY_LABEL_KEYS[item])} />
         ))}
       </SegmentedControl>
 
@@ -93,7 +104,7 @@ export function AppsGrid() {
           <Skeleton height={140} />
         </Grid>
       ) : filtered.length === 0 ? (
-        <EmptyState title="没有匹配的应用" description="切换分类查看其他应用" />
+        <EmptyState title={t("apps.emptyTitle")} description={t("apps.emptyDescription")} />
       ) : (
         <Grid columns={{ minWidth: 240, max: 4 }} gap={4}>
           {filtered.map((app) => (
@@ -109,7 +120,7 @@ export function AppsGrid() {
                 <Text type="supporting" color="secondary">
                   {app.description}
                 </Text>
-                <Badge label={app.category} variant="neutral" />
+                <Badge label={t(CATEGORY_LABEL_KEYS[app.category])} variant="neutral" />
               </Stack>
             </SelectableCard>
           ))}

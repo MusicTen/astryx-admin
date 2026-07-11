@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Button } from "@astryxdesign/core/Button";
 import { Dialog, DialogHeader } from "@astryxdesign/core/Dialog";
 import { FormLayout } from "@astryxdesign/core/FormLayout";
@@ -8,15 +9,15 @@ import { TextInput } from "@astryxdesign/core/TextInput";
 import type { User, UserInput, UserRole, UserStatus } from "./types";
 
 const ROLE_OPTIONS = [
-  { label: "管理员", value: "admin" },
-  { label: "编辑", value: "editor" },
-  { label: "访客", value: "viewer" },
+  { labelKey: "users.role.admin", value: "admin" },
+  { labelKey: "users.role.editor", value: "editor" },
+  { labelKey: "users.role.viewer", value: "viewer" },
 ];
 
 const STATUS_OPTIONS = [
-  { label: "启用", value: "active" },
-  { label: "停用", value: "suspended" },
-  { label: "已邀请", value: "invited" },
+  { labelKey: "users.status.active", value: "active" },
+  { labelKey: "users.status.suspended", value: "suspended" },
+  { labelKey: "users.status.invited", value: "invited" },
 ];
 
 const EMPTY: UserInput = {
@@ -43,6 +44,7 @@ export function UserFormDialog({
   onOpenChange,
   onSubmit,
 }: UserFormDialogProps) {
+  const { t } = useTranslation();
   const [form, setForm] = useState<UserInput>(EMPTY);
 
   useEffect(() => {
@@ -64,50 +66,57 @@ export function UserFormDialog({
 
   return (
     <Dialog isOpen={isOpen} onOpenChange={onOpenChange} purpose="form" width={480}>
-      <DialogHeader title={editingUser ? "编辑用户" : "添加用户"} onOpenChange={onOpenChange} />
+      <DialogHeader
+        title={editingUser ? t("users.form.editTitle") : t("users.form.addTitle")}
+        onOpenChange={onOpenChange}
+      />
       <Stack direction="vertical" gap={4}>
         <FormLayout direction="vertical">
           <TextInput
-            label="用户名"
+            label={t("users.columns.username")}
             value={form.username}
             changeAction={(username) => setForm((f) => ({ ...f, username }))}
             isRequired
           />
           <TextInput
-            label="姓名"
+            label={t("users.columns.name")}
             value={form.name}
             changeAction={(name) => setForm((f) => ({ ...f, name }))}
             isRequired
           />
           <TextInput
-            label="邮箱"
+            label={t("users.columns.email")}
             type="email"
             value={form.email}
             changeAction={(email) => setForm((f) => ({ ...f, email }))}
             isRequired
           />
           <TextInput
-            label="手机号码"
+            label={t("users.columns.phone")}
             value={form.phone}
             changeAction={(phone) => setForm((f) => ({ ...f, phone }))}
           />
           <Selector
-            label="角色"
-            options={ROLE_OPTIONS}
+            label={t("users.columns.role")}
+            options={ROLE_OPTIONS.map((o) => ({ label: t(o.labelKey), value: o.value }))}
             value={form.role}
             onChange={(role) => setForm((f) => ({ ...f, role: role as UserRole }))}
           />
           <Selector
-            label="状态"
-            options={STATUS_OPTIONS}
+            label={t("users.columns.status")}
+            options={STATUS_OPTIONS.map((o) => ({ label: t(o.labelKey), value: o.value }))}
             value={form.status}
             onChange={(status) => setForm((f) => ({ ...f, status: status as UserStatus }))}
           />
         </FormLayout>
         <Stack direction="horizontal" gap={2}>
-          <Button label="取消" variant="secondary" clickAction={() => onOpenChange(false)} />
           <Button
-            label={editingUser ? "保存" : "创建"}
+            label={t("common.cancel")}
+            variant="secondary"
+            clickAction={() => onOpenChange(false)}
+          />
+          <Button
+            label={editingUser ? t("common.save") : t("common.create")}
             variant="primary"
             isLoading={isSubmitting}
             isDisabled={!form.username || !form.name || !form.email}

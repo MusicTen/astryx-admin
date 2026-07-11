@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Card } from "@astryxdesign/core/Card";
 import { Grid } from "@astryxdesign/core/Grid";
 import { Icon } from "@astryxdesign/core/Icon";
@@ -10,28 +11,29 @@ import { useDashboardStats, type DashboardStats } from "./useDashboardStats";
 
 const CARDS: {
   key: keyof DashboardStats;
-  title: string;
+  titleKey: string;
   icon: typeof Users;
-  trend: string;
+  trendKey: string;
 }[] = [
-  { key: "userTotal", title: "用户总数", icon: Users, trend: "较上月 +12.4%" },
-  { key: "orderTotal", title: "订单总数", icon: CreditCard, trend: "较上月 +19%" },
-  { key: "activeToday", title: "今日活跃", icon: Activity, trend: "较昨日 +8.2%" },
-  { key: "errorCount", title: "今日告警", icon: TriangleAlert, trend: "较昨日 -2 起" },
+  { key: "userTotal", titleKey: "dashboard.stats.userTotal", icon: Users, trendKey: "dashboard.stats.userTotalTrend" },
+  { key: "orderTotal", titleKey: "dashboard.stats.orderTotal", icon: CreditCard, trendKey: "dashboard.stats.orderTotalTrend" },
+  { key: "activeToday", titleKey: "dashboard.stats.activeToday", icon: Activity, trendKey: "dashboard.stats.activeTodayTrend" },
+  { key: "errorCount", titleKey: "dashboard.stats.errorCount", icon: TriangleAlert, trendKey: "dashboard.stats.errorCountTrend" },
 ];
 
 export function StatCards() {
   const { stats, isLoading } = useDashboardStats();
+  const { t } = useTranslation();
   return (
     <Grid columns={{ minWidth: 200, max: 4 }} gap={4}>
       {CARDS.map((card) => (
         <Card key={card.key} padding={4}>
           <Stack direction="vertical" gap={2}>
             <Toolbar
-              label={card.title}
+              label={t(card.titleKey)}
               startContent={
                 <Text type="supporting" color="secondary">
-                  {card.title}
+                  {t(card.titleKey)}
                 </Text>
               }
               endContent={<Icon icon={card.icon} size="sm" color="secondary" />}
@@ -44,7 +46,7 @@ export function StatCards() {
               </Text>
             )}
             <Text type="supporting" color="secondary">
-              {card.trend}
+              {t(card.trendKey)}
             </Text>
           </Stack>
         </Card>

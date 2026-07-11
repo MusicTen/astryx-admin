@@ -5,13 +5,16 @@ import { Stack } from "@astryxdesign/core/Stack";
 import { TopNav, TopNavHeading } from "@astryxdesign/core/TopNav";
 import { useRouterState } from "@tanstack/react-router";
 import { Blocks, KanbanSquare, LayoutDashboard, Palette, Settings, UserCircle, Users } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { useUiStore } from "../../stores/ui";
 import "./admin-shell.css";
+import { LanguageControl } from "./LanguageControl";
 import { PageBreadcrumbs } from "./PageBreadcrumbs";
 import { ThemeModeControl } from "./ThemeModeControl";
 import { UserMenu } from "./UserMenu";
 
 export function AdminShell({ children }: { children: ReactNode }) {
+  const { t } = useTranslation();
   const pathname = useRouterState({ select: (state) => state.location.pathname });
   const isSideNavCollapsed = useUiStore((state) => state.isSideNavCollapsed);
   const setSideNavCollapsed = useUiStore((state) => state.setSideNavCollapsed);
@@ -25,6 +28,7 @@ export function AdminShell({ children }: { children: ReactNode }) {
           startContent={<PageBreadcrumbs pathname={pathname} />}
           endContent={
             <Stack direction="horizontal" gap={3}>
+              <LanguageControl />
               <ThemeModeControl />
               <UserMenu />
             </Stack>
@@ -38,54 +42,54 @@ export function AdminShell({ children }: { children: ReactNode }) {
             onCollapsedChange: setSideNavCollapsed,
           }}
         >
-          <SideNavSection title="概览">
+          <SideNavSection title={t("nav.sectionOverview")}>
             <SideNavItem
-              label="仪表盘"
+              label={t("nav.dashboard")}
               href="/"
               icon={LayoutDashboard}
               selectedIcon={LayoutDashboard}
               isSelected={pathname === "/"}
             />
           </SideNavSection>
-          <SideNavSection title="工作">
+          <SideNavSection title={t("nav.sectionWork")}>
             <SideNavItem
-              label="任务看板"
+              label={t("nav.tasks")}
               href="/tasks"
               icon={KanbanSquare}
               selectedIcon={KanbanSquare}
               isSelected={pathname === "/tasks"}
             />
             <SideNavItem
-              label="应用集成"
+              label={t("nav.apps")}
               href="/apps"
               icon={Blocks}
               selectedIcon={Blocks}
               isSelected={pathname === "/apps"}
             />
           </SideNavSection>
-          <SideNavSection title="管理">
+          <SideNavSection title={t("nav.sectionManagement")}>
             <SideNavItem
-              label="用户管理"
+              label={t("nav.users")}
               href="/users"
               icon={Users}
               selectedIcon={Users}
               isSelected={pathname === "/users"}
             />
             <SideNavItem
-              label="系统设置"
+              label={t("nav.settings")}
               icon={Settings}
               selectedIcon={Settings}
               collapsible={{ defaultIsCollapsed: false }}
             >
               <SideNavItem
-                label="个人资料"
+                label={t("nav.profile")}
                 href="/settings/profile"
                 icon={UserCircle}
                 selectedIcon={UserCircle}
                 isSelected={pathname === "/settings/profile"}
               />
               <SideNavItem
-                label="外观"
+                label={t("nav.appearance")}
                 href="/settings/appearance"
                 icon={Palette}
                 selectedIcon={Palette}

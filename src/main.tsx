@@ -3,7 +3,11 @@ import "@astryxdesign/core/astryx.css";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
+import { initI18n } from "./i18n";
 import { routeTree } from "./routeTree.gen";
+import { useUiStore } from "./stores/ui";
+
+initI18n(useUiStore.getState().language);
 
 const router = createRouter({ routeTree, basepath: import.meta.env.BASE_URL });
 

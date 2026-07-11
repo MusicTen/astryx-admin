@@ -5,9 +5,11 @@ import { Kbd } from "@astryxdesign/core/Kbd";
 import { Text } from "@astryxdesign/core/Text";
 import { useNavigate } from "@tanstack/react-router";
 import { Palette, UserCircle } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { useAuthStore } from "../../stores/auth";
 
 export function UserMenu() {
+  const { t } = useTranslation();
   const user = useAuthStore((state) => state.user);
   const logout = useAuthStore((state) => state.logout);
   const navigate = useNavigate();
@@ -15,7 +17,7 @@ export function UserMenu() {
   return (
     <DropdownMenu
       button={{
-        label: user?.name ?? "账号",
+        label: user?.name ?? t("userMenu.account"),
         icon: <Avatar name={user?.name ?? "?"} size="tiny" />,
         isIconOnly: true,
         variant: "ghost",
@@ -23,23 +25,23 @@ export function UserMenu() {
       }}
       hasChevron={false}
     >
-      <DropdownMenuItem label={user?.name ?? "账号"} description={user?.email ?? "-"} />
+      <DropdownMenuItem label={user?.name ?? t("userMenu.account")} description={user?.email ?? "-"} />
       <Divider />
       <DropdownMenuItem
         icon={UserCircle}
-        label="个人资料"
+        label={t("userMenu.profile")}
         endContent={<Kbd keys="shift+mod+p" />}
         onClick={() => void navigate({ to: "/settings/profile" })}
       />
       <DropdownMenuItem
         icon={Palette}
-        label="外观设置"
+        label={t("userMenu.appearanceSettings")}
         endContent={<Kbd keys="mod+s" />}
         onClick={() => void navigate({ to: "/settings/appearance" })}
       />
       <Divider />
       <DropdownMenuItem
-        label={<Text style={{ color: "var(--color-error)" }}>退出登录</Text>}
+        label={<Text style={{ color: "var(--color-error)" }}>{t("userMenu.logout")}</Text>}
         endContent={<Kbd keys="shift+mod+q" />}
         onClick={() => {
           logout();

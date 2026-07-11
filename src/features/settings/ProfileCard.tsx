@@ -4,9 +4,11 @@ import { Card } from "@astryxdesign/core/Card";
 import { Stack } from "@astryxdesign/core/Stack";
 import { Text } from "@astryxdesign/core/Text";
 import { useNavigate } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
 import { useAuthStore } from "../../stores/auth";
 
 export function ProfileCard() {
+  const { t } = useTranslation();
   const user = useAuthStore((state) => state.user);
   const logout = useAuthStore((state) => state.logout);
   const navigate = useNavigate();
@@ -22,13 +24,13 @@ export function ProfileCard() {
         <Stack direction="horizontal" gap={3}>
           <Avatar name={user?.name ?? "?"} size="large" />
           <Stack direction="vertical" gap={1}>
-            <Text type="large">{user?.name ?? "未登录"}</Text>
+            <Text type="large">{user?.name ?? t("settings.profile.notLoggedIn")}</Text>
             <Text type="supporting" color="secondary">
               {user?.email ?? "-"}
             </Text>
           </Stack>
         </Stack>
-        <Button label="退出登录" variant="secondary" clickAction={handleLogout} />
+        <Button label={t("userMenu.logout")} variant="secondary" clickAction={handleLogout} />
       </Stack>
     </Card>
   );

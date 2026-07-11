@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { createFileRoute } from "@tanstack/react-router";
 import { EmptyState } from "@astryxdesign/core/EmptyState";
 import { Grid } from "@astryxdesign/core/Grid";
@@ -10,21 +11,22 @@ import { StatCards } from "../../features/dashboard/StatCards";
 import { TrendCharts } from "../../features/dashboard/TrendCharts";
 
 const TABS = [
-  { value: "overview", label: "概览" },
-  { value: "analytics", label: "分析" },
-  { value: "reports", label: "报表" },
-  { value: "notifications", label: "通知" },
+  { value: "overview", labelKey: "dashboard.tabs.overview" },
+  { value: "analytics", labelKey: "dashboard.tabs.analytics" },
+  { value: "reports", labelKey: "dashboard.tabs.reports" },
+  { value: "notifications", labelKey: "dashboard.tabs.notifications" },
 ];
 
 function DashboardPage() {
   const [tab, setTab] = useState("overview");
+  const { t } = useTranslation();
 
   return (
     <Stack direction="vertical" gap={4}>
-      <Text type="display-3">仪表盘</Text>
+      <Text type="display-3">{t("dashboard.title")}</Text>
       <TabList value={tab} onChange={setTab}>
         {TABS.map((item) => (
-          <Tab key={item.value} value={item.value} label={item.label} />
+          <Tab key={item.value} value={item.value} label={t(item.labelKey)} />
         ))}
       </TabList>
       {tab === "overview" ? (
@@ -36,7 +38,7 @@ function DashboardPage() {
           </Grid>
         </Stack>
       ) : (
-        <EmptyState title="暂未开放" description="该页签的内容尚未实现" />
+        <EmptyState title={t("dashboard.comingSoon.title")} description={t("dashboard.comingSoon.description")} />
       )}
     </Stack>
   );

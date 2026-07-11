@@ -1,0 +1,200 @@
+{
+  "common": {
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "save": "Save",
+    "create": "Create",
+    "actionFailed": "Action failed. Please try again later.",
+    "deleteFailed": "Delete failed. Please try again later."
+  },
+  "nav": {
+    "sectionOverview": "Overview",
+    "sectionWork": "Work",
+    "sectionManagement": "Management",
+    "dashboard": "Dashboard",
+    "tasks": "Task Board",
+    "apps": "Integrations",
+    "users": "Users",
+    "settings": "Settings",
+    "profile": "Profile",
+    "appearance": "Appearance"
+  },
+  "userMenu": {
+    "account": "Account",
+    "profile": "Profile",
+    "appearanceSettings": "Appearance",
+    "logout": "Log Out"
+  },
+  "theme": {
+    "label": "Theme mode",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "language": {
+    "label": "Language"
+  },
+  "login": {
+    "demoHint": "Demo account: any username / admin123",
+    "username": "Username",
+    "password": "Password",
+    "submit": "Log In",
+    "failed": "Login failed. Please try again later."
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "tabs": {
+      "overview": "Overview",
+      "analytics": "Analytics",
+      "reports": "Reports",
+      "notifications": "Notifications"
+    },
+    "comingSoon": {
+      "title": "Coming Soon",
+      "description": "This tab has not been implemented yet"
+    },
+    "stats": {
+      "userTotal": "Total Users",
+      "userTotalTrend": "+12.4% vs last month",
+      "orderTotal": "Total Orders",
+      "orderTotalTrend": "+19% vs last month",
+      "activeToday": "Active Today",
+      "activeTodayTrend": "+8.2% vs yesterday",
+      "errorCount": "Alerts Today",
+      "errorCountTrend": "2 fewer vs yesterday"
+    },
+    "trends": {
+      "title": "Overview",
+      "revenue": "Revenue"
+    },
+    "recentSales": {
+      "title": "Recent Sales",
+      "summary_one": "{{count}} sale closed this month",
+      "summary_other": "{{count}} sales closed this month",
+      "emptyTitle": "No sales yet",
+      "emptyDescription": "New orders will show up here"
+    }
+  },
+  "tasks": {
+    "title": "Task Board",
+    "status": {
+      "backlog": "Backlog",
+      "inProgress": "In Progress",
+      "inReview": "In Review",
+      "done": "Done"
+    },
+    "priority": {
+      "urgent": "Urgent",
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low"
+    },
+    "actionsLabel": "Task actions",
+    "new": "New Task",
+    "updated": "Task updated",
+    "created": "Task created",
+    "deleted": "Task deleted",
+    "moveFailed": "Failed to move task. Please try again later.",
+    "emptyTitle": "No tasks",
+    "emptyDescription": "Click \"New Task\" in the top right to create one",
+    "unassigned": "Unassigned",
+    "deleteDialog": {
+      "title": "Delete Task",
+      "description": "Delete \"{{title}}\"? This action cannot be undone."
+    },
+    "form": {
+      "editTitle": "Edit Task",
+      "createTitle": "New Task",
+      "title": "Title",
+      "status": "Status",
+      "priority": "Priority",
+      "assignee": "Assignee",
+      "tags": "Tags (comma separated)"
+    }
+  },
+  "users": {
+    "title": "Users",
+    "subtitle": "Manage users and their roles here",
+    "pageHeaderLabel": "Users page header",
+    "role": {
+      "admin": "Admin",
+      "editor": "Editor",
+      "viewer": "Viewer"
+    },
+    "status": {
+      "active": "Active",
+      "suspended": "Suspended",
+      "invited": "Invited"
+    },
+    "updated": "User updated",
+    "created": "User created",
+    "deleted": "User deleted",
+    "batchDeleted_one": "Deleted {{count}} user",
+    "batchDeleted_other": "Deleted {{count}} users",
+    "batchDeleteFailed": "Batch delete failed. Please try again later.",
+    "columns": {
+      "username": "Username",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "status": "Status",
+      "role": "Role",
+      "actions": "Actions"
+    },
+    "actionsLabel": "User actions",
+    "invite": "Invite User",
+    "inviteComingSoon": "Invitations are coming soon",
+    "add": "Add User",
+    "filterLabel": "User filters",
+    "search": "Search",
+    "searchPlaceholder": "Search by username, name, or email",
+    "batchDelete": "Batch Delete ({{count}})",
+    "emptyTitle": "No users",
+    "emptyDescription": "Adjust the filters, or click \"Add User\" in the top right",
+    "paginationLabel": "User list pagination",
+    "deleteDialog": {
+      "title": "Delete User",
+      "description": "Delete \"{{name}}\"? This action cannot be undone."
+    },
+    "batchDeleteDialog": {
+      "title": "Batch Delete Users",
+      "description_one": "Delete the {{count}} selected user? This action cannot be undone.",
+      "description_other": "Delete the {{count}} selected users? This action cannot be undone."
+    },
+    "form": {
+      "editTitle": "Edit User",
+      "addTitle": "Add User"
+    }
+  },
+  "apps": {
+    "title": "Integrations",
+    "filterLabel": "Filter by category",
+    "categories": {
+      "all": "All",
+      "collaboration": "Collaboration",
+      "devtools": "Developer Tools",
+      "payment": "Payments",
+      "automation": "Automation",
+      "analytics": "Analytics"
+    },
+    "connected": "Connected",
+    "disconnected": "Disconnected",
+    "emptyTitle": "No matching apps",
+    "emptyDescription": "Switch categories to see other apps"
+  },
+  "settings": {
+    "appearance": {
+      "pageTitle": "Appearance",
+      "cardTitle": "Appearance",
+      "cardDescription": "Adjust the interface theme and language"
+    },
+    "profile": {
+      "pageTitle": "Profile",
+      "notLoggedIn": "Not logged in"
+    }
+  },
+  "errors": {
+    "requestFailed": "Request failed (HTTP {{status}})"
+  }
+}

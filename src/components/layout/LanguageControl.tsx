@@ -1,0 +1,26 @@
+import { SegmentedControl, SegmentedControlItem } from "@astryxdesign/core/SegmentedControl";
+import { useTranslation } from "react-i18next";
+import { useUiStore, type Language } from "../../stores/ui";
+
+const LANGUAGES: { value: Language; label: string }[] = [
+  { value: "zh", label: "中文" },
+  { value: "en", label: "English" },
+];
+
+export function LanguageControl() {
+  const { t } = useTranslation();
+  const language = useUiStore((state) => state.language);
+  const setLanguage = useUiStore((state) => state.setLanguage);
+  return (
+    <SegmentedControl
+      label={t("language.label")}
+      size="sm"
+      value={language}
+      onChange={(value) => setLanguage(value as Language)}
+    >
+      {LANGUAGES.map((item) => (
+        <SegmentedControlItem key={item.value} value={item.value} label={item.label} />
+      ))}
+    </SegmentedControl>
+  );
+}

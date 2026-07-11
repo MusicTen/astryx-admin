@@ -1,7 +1,8 @@
-import { forwardRef, type ComponentPropsWithoutRef, type ReactNode } from "react";
+import { useEffect, forwardRef, type ComponentPropsWithoutRef, type ReactNode } from "react";
 import { Theme } from "@astryxdesign/core";
 import { LinkProvider } from "@astryxdesign/core/Link";
 import { Link as RouterLink } from "@tanstack/react-router";
+import i18n from "i18next";
 import { SwrProvider } from "../lib/swr";
 import { useUiStore } from "../stores/ui";
 import { appTheme } from "../theme/appTheme";
@@ -19,6 +20,13 @@ const AppLink = forwardRef<HTMLAnchorElement, ComponentPropsWithoutRef<"a">>(fun
 
 export function AppProviders({ children }: { children: ReactNode }) {
   const themeMode = useUiStore((state) => state.themeMode);
+  const language = useUiStore((state) => state.language);
+
+  useEffect(() => {
+    void i18n.changeLanguage(language);
+    document.documentElement.lang = language === "zh" ? "zh-CN" : "en";
+  }, [language]);
+
   return (
     <Theme theme={appTheme} mode={themeMode}>
       <LinkProvider component={AppLink}>

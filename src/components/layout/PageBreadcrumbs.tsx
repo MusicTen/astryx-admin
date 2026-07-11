@@ -1,26 +1,28 @@
 import { Breadcrumbs, BreadcrumbItem } from "@astryxdesign/core/Breadcrumbs";
+import { useTranslation } from "react-i18next";
 
-const BREADCRUMB_LABELS: Record<string, string[]> = {
-  "/users": ["用户管理"],
-  "/settings/profile": ["系统设置", "个人资料"],
-  "/settings/appearance": ["系统设置", "外观"],
+const BREADCRUMB_KEYS: Record<string, string[]> = {
+  "/users": ["nav.users"],
+  "/settings/profile": ["nav.settings", "nav.profile"],
+  "/settings/appearance": ["nav.settings", "nav.appearance"],
 };
 
 export function getBreadcrumbLabels(pathname: string): string[] {
-  return BREADCRUMB_LABELS[pathname] ?? [];
+  return BREADCRUMB_KEYS[pathname] ?? [];
 }
 
 export function PageBreadcrumbs({ pathname }: { pathname: string }) {
-  const labels = getBreadcrumbLabels(pathname);
-  if (labels.length === 0) {
+  const { t } = useTranslation();
+  const keys = getBreadcrumbLabels(pathname);
+  if (keys.length === 0) {
     return null;
   }
 
   return (
     <Breadcrumbs variant="supporting">
-      {labels.map((label, index) => (
-        <BreadcrumbItem key={label} isCurrent={index === labels.length - 1}>
-          {label}
+      {keys.map((key, index) => (
+        <BreadcrumbItem key={key} isCurrent={index === keys.length - 1}>
+          {t(key)}
         </BreadcrumbItem>
       ))}
     </Breadcrumbs>

@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { AlertDialog } from "@astryxdesign/core/AlertDialog";
 import { Badge } from "@astryxdesign/core/Badge";
 import { Button } from "@astryxdesign/core/Button";
@@ -31,20 +32,20 @@ import type { User, UserInput, UserRole, UserStatus } from "./types";
 
 const PAGE_SIZE = 10;
 
-const ROLE_LABEL: Record<UserRole, string> = {
-  admin: "管理员",
-  editor: "编辑",
-  viewer: "访客",
+const ROLE_LABEL_KEYS: Record<UserRole, string> = {
+  admin: "users.role.admin",
+  editor: "users.role.editor",
+  viewer: "users.role.viewer",
 };
 const ROLE_ICON: Record<UserRole, typeof ShieldCheck> = {
   admin: ShieldCheck,
   editor: PencilLine,
   viewer: UserRoundCog,
 };
-const STATUS_LABEL: Record<UserStatus, string> = {
-  active: "启用",
-  suspended: "停用",
-  invited: "已邀请",
+const STATUS_LABEL_KEYS: Record<UserStatus, string> = {
+  active: "users.status.active",
+  suspended: "users.status.suspended",
+  invited: "users.status.invited",
 };
 const STATUS_VARIANT: Record<UserStatus, "success" | "error" | "info"> = {
   active: "success",
@@ -52,18 +53,10 @@ const STATUS_VARIANT: Record<UserStatus, "success" | "error" | "info"> = {
   invited: "info",
 };
 
-const STATUS_FILTER_OPTIONS = (Object.keys(STATUS_LABEL) as UserStatus[]).map((value) => ({
-  value,
-  label: STATUS_LABEL[value],
-}));
-const ROLE_FILTER_OPTIONS = (Object.keys(ROLE_LABEL) as UserRole[]).map((value) => ({
-  value,
-  label: ROLE_LABEL[value],
-}));
-
 type UserRow = User & Record<string, unknown>;
 
 export function UserTable() {
+  const { t } = useTranslation();
   const [page, setPage] = useState(1);
   const [keyword, setKeyword] = useState("");
   const [statuses, setStatuses] = useState<string[]>([]);
@@ -85,6 +78,23 @@ export function UserTable() {
   });
   const toast = useToast();
 
+  const statusFilterOptions = useMemo(
+    () =>
+      (Object.keys(STATUS_LABEL_KEYS) as UserStatus[]).map((value) => ({
+        value,
+        label: t(STATUS_LABEL_KEYS[value]),
+      })),
+    [t],
+  );
+  const roleFilterOptions = useMemo(
+    () =>
+      (Object.keys(ROLE_LABEL_KEYS) as UserRole[]).map((value) => ({
+        value,
+        label: t(ROLE_LABEL_KEYS[value]),
+      })),
+    [t],
+  );
+
   useEffect(() => {
     setSelectedKeys(new Set());
   }, [page, keyword, statuses, roles]);
@@ -98,15 +108,15 @@ export function UserTable() {
     try {
       if (editingUser) {
         await updateUser(editingUser.id, input);
-        toast({ body: "用户已更新" });
+        toast({ body: t("users.updated") });
       } else {
         await createUser(input);
-        toast({ body: "用户已创建" });
+        toast({ body: t("users.created") });
       }
       setFormOpen(false);
       await refresh();
     } catch (error) {
-      notifyError(error, "操作失败，请稍后重试");
+      notifyError(error, t("common.actionFailed"));
     } finally {
       setSubmitting(false);
     }
@@ -116,11 +126,11 @@ export function UserTable() {
     if (!deletingUser) return;
     try {
       await deleteUser(deletingUser.id);
-      toast({ body: "用户已删除" });
+      toast({ body: t("users.deleted") });
       setDeletingUser(null);
       await refresh();
     } catch (error) {
-      notifyError(error, "删除失败，请稍后重试");
+      notifyError(error, t("common.deleteFailed"));
     }
   };
 
@@ -128,12 +138,12 @@ export function UserTable() {
     setBulkDeleting(true);
     try {
       await Promise.all(Array.from(selectedKeys).map((id) => deleteUser(id)));
-      toast({ body: `已删除 ${selectedKeys.size} 个用户` });
+      toast({ body: t("users.batchDeleted", { count: selectedKeys.size }) });
       setSelectedKeys(new Set());
       setBulkDeleteOpen(false);
       await refresh();
     } catch (error) {
-      notifyError(error, "批量删除失败，请稍后重试");
+      notifyError(error, t("users.batchDeleteFailed"));
     } finally {
       setBulkDeleting(false);
     }
@@ -153,50 +163,50 @@ export function UserTable() {
   const sortablePlugin = useTableSortable<UserRow>(sortConfig);
 
   const columns: TableColumn<UserRow>[] = [
-    { key: "username", header: "用户名", width: proportional(1.2), sortable: true },
-    { key: "name", header: "姓名", width: proportional(1) },
-    { key: "email", header: "邮箱", width: proportional(1.6), sortable: true },
-    { key: "phone", header: "手机号码", width: proportional(1.2) },
+    { key: "username", header: t("users.columns.username"), width: proportional(1.2), sortable: true },
+    { key: "name", header: t("users.columns.name"), width: proportional(1) },
+    { key: "email", header: t("users.columns.email"), width: proportional(1.6), sortable: true },
+    { key: "phone", header: t("users.columns.phone"), width: proportional(1.2) },
     {
       key: "status",
-      header: "状态",
+      header: t("users.columns.status"),
       width: pixel(100),
       renderCell: (user) => (
-        <Badge label={STATUS_LABEL[user.status]} variant={STATUS_VARIANT[user.status]} />
+        <Badge label={t(STATUS_LABEL_KEYS[user.status])} variant={STATUS_VARIANT[user.status]} />
       ),
     },
     {
       key: "role",
-      header: "角色",
+      header: t("users.columns.role"),
       width: proportional(1),
       renderCell: (user) => {
         const RoleIcon = ROLE_ICON[user.role];
         return (
           <Stack direction="horizontal" align="center" gap={2}>
             <RoleIcon width={16} height={16} />
-            <Text type="body">{ROLE_LABEL[user.role]}</Text>
+            <Text type="body">{t(ROLE_LABEL_KEYS[user.role])}</Text>
           </Stack>
         );
       },
     },
     {
       key: "actions",
-      header: "操作",
+      header: t("users.columns.actions"),
       width: pixel(56),
       renderCell: (user) => (
         <MoreMenu
-          label="用户操作"
+          label={t("users.actionsLabel")}
           size="sm"
           items={[
             {
-              label: "编辑",
+              label: t("common.edit"),
               onClick: () => {
                 setEditingUser(user);
                 setFormOpen(true);
               },
             },
             { type: "divider" },
-            { label: "删除", onClick: () => setDeletingUser(user) },
+            { label: t("common.delete"), onClick: () => setDeletingUser(user) },
           ]}
         />
       ),
@@ -206,26 +216,26 @@ export function UserTable() {
   return (
     <Stack direction="vertical" gap={4}>
       <Toolbar
-        label="用户页面标题"
+        label={t("users.pageHeaderLabel")}
         startContent={
           <Stack direction="vertical" gap={1}>
-            <Text type="display-3">用户列表</Text>
+            <Text type="display-3">{t("users.title")}</Text>
             <Text type="supporting" color="secondary">
-              在这里管理用户及其角色
+              {t("users.subtitle")}
             </Text>
           </Stack>
         }
         endContent={
           <Stack direction="horizontal" gap={2}>
             <Button
-              label="邀请用户"
+              label={t("users.invite")}
               variant="secondary"
               clickAction={() => {
-                toast({ body: "邀请功能开发中，敬请期待" });
+                toast({ body: t("users.inviteComingSoon") });
               }}
             />
             <Button
-              label="添加用户"
+              label={t("users.add")}
               variant="primary"
               clickAction={() => {
                 setEditingUser(null);
@@ -237,13 +247,13 @@ export function UserTable() {
       />
 
       <Toolbar
-        label="用户筛选"
+        label={t("users.filterLabel")}
         startContent={
           <Stack direction="horizontal" gap={2}>
             <TextInput
-              label="搜索"
+              label={t("users.search")}
               isLabelHidden
-              placeholder="按用户名/姓名/邮箱搜索"
+              placeholder={t("users.searchPlaceholder")}
               value={keyword}
               hasClear
               changeAction={(value) => {
@@ -252,10 +262,10 @@ export function UserTable() {
               }}
             />
             <MultiSelector
-              label="状态"
+              label={t("users.columns.status")}
               isLabelHidden
-              placeholder="状态"
-              options={STATUS_FILTER_OPTIONS}
+              placeholder={t("users.columns.status")}
+              options={statusFilterOptions}
               value={statuses}
               onChange={(value) => {
                 setStatuses(value);
@@ -264,10 +274,10 @@ export function UserTable() {
               triggerDisplay="labels"
             />
             <MultiSelector
-              label="角色"
+              label={t("users.columns.role")}
               isLabelHidden
-              placeholder="角色"
-              options={ROLE_FILTER_OPTIONS}
+              placeholder={t("users.columns.role")}
+              options={roleFilterOptions}
               value={roles}
               onChange={(value) => {
                 setRoles(value);
@@ -280,7 +290,7 @@ export function UserTable() {
         endContent={
           selectedKeys.size > 0 ? (
             <Button
-              label={`批量删除 (${selectedKeys.size})`}
+              label={t("users.batchDelete", { count: selectedKeys.size })}
               variant="destructive"
               size="sm"
               clickAction={() => setBulkDeleteOpen(true)}
@@ -296,7 +306,7 @@ export function UserTable() {
           <Skeleton height={40} />
         </Stack>
       ) : users.length === 0 ? (
-        <EmptyState title="暂无用户" description="调整筛选条件，或点击右上角添加用户" />
+        <EmptyState title={t("users.emptyTitle")} description={t("users.emptyDescription")} />
       ) : (
         <Table<UserRow>
           data={sortedData}
@@ -313,7 +323,7 @@ export function UserTable() {
         pageSize={PAGE_SIZE}
         onChange={setPage}
         variant="pages"
-        label="用户列表分页"
+        label={t("users.paginationLabel")}
       />
 
       <UserFormDialog
@@ -329,22 +339,22 @@ export function UserTable() {
         onOpenChange={(isOpen) => {
           if (!isOpen) setDeletingUser(null);
         }}
-        title="删除用户"
-        description={`确定删除「${deletingUser?.name ?? ""}」吗？此操作不可撤销。`}
-        actionLabel="删除"
+        title={t("users.deleteDialog.title")}
+        description={t("users.deleteDialog.description", { name: deletingUser?.name ?? "" })}
+        actionLabel={t("common.delete")}
         actionVariant="destructive"
-        cancelLabel="取消"
+        cancelLabel={t("common.cancel")}
         onAction={handleDelete}
       />
 
       <AlertDialog
         isOpen={isBulkDeleteOpen}
         onOpenChange={setBulkDeleteOpen}
-        title="批量删除用户"
-        description={`确定删除选中的 ${selectedKeys.size} 个用户吗？此操作不可撤销。`}
-        actionLabel="删除"
+        title={t("users.batchDeleteDialog.title")}
+        description={t("users.batchDeleteDialog.description", { count: selectedKeys.size })}
+        actionLabel={t("common.delete")}
         actionVariant="destructive"
-        cancelLabel="取消"
+        cancelLabel={t("common.cancel")}
         isActionLoading={isBulkDeleting}
         onAction={handleBulkDelete}
       />

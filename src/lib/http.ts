@@ -1,4 +1,5 @@
 import ky, { HTTPError } from "ky";
+import i18n from "i18next";
 import { useAuthStore } from "../stores/auth";
 
 export class ApiError extends Error {
@@ -36,7 +37,7 @@ export const http = ky.create({
         return new ApiError(
           status,
           body.code ?? "UNKNOWN",
-          body.message ?? `请求失败（HTTP ${status}）`,
+          body.message ?? i18n.t("errors.requestFailed", { status }),
         );
       },
     ],
