@@ -6,7 +6,7 @@ import { FormLayout } from "@astryxdesign/core/FormLayout";
 import { Selector } from "@astryxdesign/core/Selector";
 import { Stack } from "@astryxdesign/core/Stack";
 import { TextInput } from "@astryxdesign/core/TextInput";
-import { useUsers } from "../users/useUsers";
+import { useUsers } from "../users";
 import type { Task, TaskInput, TaskPriority, TaskStatus } from "./types";
 
 const STATUS_OPTIONS: { labelKey: string; value: TaskStatus }[] = [

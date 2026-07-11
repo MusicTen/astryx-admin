@@ -13,7 +13,7 @@ import { Text } from "@astryxdesign/core/Text";
 import { useToast } from "@astryxdesign/core/Toast";
 import { Toolbar } from "@astryxdesign/core/Toolbar";
 import { ApiError } from "../../lib/http";
-import { useUsers } from "../users/useUsers";
+import { useUsers } from "../users";
 import { createTask, deleteTask, updateTask } from "./api";
 import { groupTasksByStatus, TASK_STATUSES } from "./groupTasksByStatus";
 import { TaskCard } from "./TaskCard";

@@ -5,7 +5,7 @@ import { EmptyState } from "@astryxdesign/core/EmptyState";
 import { Skeleton } from "@astryxdesign/core/Skeleton";
 import { Stack, StackItem } from "@astryxdesign/core/Stack";
 import { Text } from "@astryxdesign/core/Text";
-import { useUsers } from "../users/useUsers";
+import { useUsers } from "../users";
 
 const SALE_AMOUNTS = [1999, 39, 299, 99, 39];
 
