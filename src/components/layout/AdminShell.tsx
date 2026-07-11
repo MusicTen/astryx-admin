@@ -28,8 +28,8 @@ export function AdminShell({ children }: { children: ReactNode }) {
           startContent={<PageBreadcrumbs pathname={pathname} />}
           endContent={
             <Stack direction="horizontal" gap={3}>
-              <LanguageControl />
-              <ThemeModeControl />
+              <LanguageControl isIconOnly />
+              <ThemeModeControl isIconOnly />
               <UserMenu />
             </Stack>
           }

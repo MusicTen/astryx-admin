@@ -1,4 +1,6 @@
+import { IconButton } from "@astryxdesign/core/IconButton";
 import { SegmentedControl, SegmentedControlItem } from "@astryxdesign/core/SegmentedControl";
+import { Languages } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useUiStore, type Language } from "../../stores/ui";
 
@@ -7,10 +9,25 @@ const LANGUAGES: { value: Language; label: string }[] = [
   { value: "en", label: "English" },
 ];
 
-export function LanguageControl() {
+export function LanguageControl({ isIconOnly = false }: { isIconOnly?: boolean }) {
   const { t } = useTranslation();
   const language = useUiStore((state) => state.language);
   const setLanguage = useUiStore((state) => state.setLanguage);
+
+  if (isIconOnly) {
+    const nextLanguage: Language = language === "zh" ? "en" : "zh";
+    return (
+      <IconButton
+        label={t("language.toggle")}
+        tooltip={t("language.toggle")}
+        icon={<Languages size={16} />}
+        variant="ghost"
+        size="sm"
+        onClick={() => setLanguage(nextLanguage)}
+      />
+    );
+  }
+
   return (
     <SegmentedControl
       label={t("language.label")}

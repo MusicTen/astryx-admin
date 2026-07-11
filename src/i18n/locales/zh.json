@@ -33,7 +33,8 @@
     "system": "系统"
   },
   "language": {
-    "label": "语言"
+    "label": "语言",
+    "toggle": "切换为 English"
   },
   "login": {
     "demoHint": "演示账号：任意用户名 / admin123",

@@ -33,7 +33,8 @@
     "system": "System"
   },
   "language": {
-    "label": "Language"
+    "label": "Language",
+    "toggle": "Switch to 中文"
   },
   "login": {
     "demoHint": "Demo account: any username / admin123",
