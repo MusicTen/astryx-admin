@@ -12,7 +12,3 @@ export interface Task {
 }
 
 export type TaskInput = Omit<Task, "id" | "createdAt">;
-
-export interface TaskListResult {
-  items: Task[];
-}

@@ -21,8 +21,3 @@ export interface UserListParams {
   statuses?: UserStatus[];
   roles?: UserRole[];
 }
-
-export interface UserListResult {
-  items: User[];
-  total: number;
-}

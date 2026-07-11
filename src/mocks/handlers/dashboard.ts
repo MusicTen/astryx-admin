@@ -19,5 +19,8 @@ export const dashboardHandlers = [
     }),
   ),
 
-  http.get("*/api/dashboard/events", () => HttpResponse.json({ items: createRecentEvents() })),
+  http.get("*/api/dashboard/events", () => {
+    const events = createRecentEvents();
+    return HttpResponse.json({ items: events, total: events.length });
+  }),
 ];

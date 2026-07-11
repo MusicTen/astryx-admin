@@ -4,7 +4,7 @@ import { createSeedIntegrations } from "../data/apps";
 export let apps = createSeedIntegrations();
 
 export const appHandlers = [
-  http.get("*/api/apps", () => HttpResponse.json({ items: apps })),
+  http.get("*/api/apps", () => HttpResponse.json({ items: apps, total: apps.length })),
 
   http.post("*/api/apps/:id/connect", ({ params }) => {
     const existing = apps.find((a) => a.id === params.id);

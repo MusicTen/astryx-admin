@@ -5,7 +5,7 @@ export let tasks = createSeedTasks();
 let nextId = tasks.length + 1;
 
 export const taskHandlers = [
-  http.get("*/api/tasks", () => HttpResponse.json({ items: tasks })),
+  http.get("*/api/tasks", () => HttpResponse.json({ items: tasks, total: tasks.length })),
 
   http.post("*/api/tasks", async ({ request }) => {
     const body = (await request.json()) as Omit<MockTask, "id" | "createdAt">;

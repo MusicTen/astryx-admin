@@ -1,5 +1,6 @@
+import type { PageResult } from "../../lib/api";
 import { http } from "../../lib/http";
-import type { User, UserInput, UserListParams, UserListResult } from "./types";
+import type { User, UserInput, UserListParams } from "./types";
 
 export function usersKey(params: UserListParams): string {
   const search = new URLSearchParams({
@@ -16,8 +17,8 @@ export function usersKey(params: UserListParams): string {
   return `users?${search.toString()}`;
 }
 
-export function fetchUsers(params: UserListParams): Promise<UserListResult> {
-  return http.get(usersKey(params)).json<UserListResult>();
+export function fetchUsers(params: UserListParams): Promise<PageResult<User>> {
+  return http.get(usersKey(params)).json<PageResult<User>>();
 }
 
 export function createUser(input: UserInput): Promise<User> {

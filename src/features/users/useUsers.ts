@@ -1,9 +1,10 @@
 import useSWR from "swr";
+import type { PageResult } from "../../lib/api";
 import { usersKey } from "./api";
-import type { UserListParams, UserListResult } from "./types";
+import type { User, UserListParams } from "./types";
 
 export function useUsers(params: UserListParams) {
-  const { data, isLoading, mutate } = useSWR<UserListResult>(usersKey(params));
+  const { data, isLoading, mutate } = useSWR<PageResult<User>>(usersKey(params));
   return {
     users: data?.items ?? [],
     total: data?.total ?? 0,

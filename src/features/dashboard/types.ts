@@ -20,7 +20,3 @@ export interface RecentEvent {
   target: string;
   createdAt: string;
 }
-
-export interface RecentEventsResult {
-  items: RecentEvent[];
-}

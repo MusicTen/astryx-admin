@@ -8,7 +8,3 @@ export interface Integration {
   icon: string;
   isConnected: boolean;
 }
-
-export interface IntegrationListResult {
-  items: Integration[];
-}

@@ -1,10 +1,11 @@
+import type { PageResult } from "../../lib/api";
 import { http } from "../../lib/http";
-import type { Task, TaskInput, TaskListResult } from "./types";
+import type { Task, TaskInput } from "./types";
 
 export const tasksKey = "tasks";
 
-export function fetchTasks(): Promise<TaskListResult> {
-  return http.get(tasksKey).json<TaskListResult>();
+export function fetchTasks(): Promise<PageResult<Task>> {
+  return http.get(tasksKey).json<PageResult<Task>>();
 }
 
 export function createTask(input: TaskInput): Promise<Task> {

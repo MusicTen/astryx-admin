@@ -1,7 +1,8 @@
 import useSWR from "swr";
-import type { RecentEventsResult } from "./types";
+import type { PageResult } from "../../lib/api";
+import type { RecentEvent } from "./types";
 
 export function useRecentEvents() {
-  const { data, isLoading } = useSWR<RecentEventsResult>("dashboard/events");
+  const { data, isLoading } = useSWR<PageResult<RecentEvent>>("dashboard/events");
   return { events: data?.items ?? [], isLoading };
 }
