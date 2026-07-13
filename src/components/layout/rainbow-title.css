@@ -1,68 +1,48 @@
-/* astryx-admin 品牌字标：每个字母用一个语义色 token 上色，纯 CSS3 nth-child 选择器 + hover 微交互实现 */
+/* astryx-admin 品牌字标：linear-gradient + background-clip:text 做流动彩虹字，
+   颜色仍取自设计系统语义色 token（亮暗色自动适配），全部效果由 CSS3 驱动，不拆分字母 DOM。
+   渐变首尾都是 red，配合 background-size:200% 让 background-position 动画首尾相接、无缝循环 */
 .rainbow-title {
-  display: inline-flex;
-}
-
-.rainbow-title span {
   display: inline-block;
-  transition: transform var(--duration-fast) var(--ease-standard);
+  background-image: linear-gradient(
+    90deg,
+    var(--color-text-red),
+    var(--color-text-orange),
+    var(--color-text-yellow),
+    var(--color-text-green),
+    var(--color-text-teal),
+    var(--color-text-cyan),
+    var(--color-text-blue),
+    var(--color-text-purple),
+    var(--color-text-pink),
+    var(--color-text-red)
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: rainbow-title-flow 5s linear infinite;
+  transition: filter var(--duration-fast) var(--ease-standard);
 }
 
-.rainbow-title:hover span {
-  transform: translateY(-2px);
+.rainbow-title:hover {
+  filter: drop-shadow(0 0 6px var(--color-accent-muted)) brightness(1.15);
+  animation-duration: 1.4s;
 }
 
-.rainbow-title span:nth-child(1) {
-  color: var(--color-text-red);
-  transition-delay: 0ms;
-}
-.rainbow-title span:nth-child(2) {
-  color: var(--color-text-orange);
-  transition-delay: 20ms;
-}
-.rainbow-title span:nth-child(3) {
-  color: var(--color-text-yellow);
-  transition-delay: 40ms;
-}
-.rainbow-title span:nth-child(4) {
-  color: var(--color-text-green);
-  transition-delay: 60ms;
-}
-.rainbow-title span:nth-child(5) {
-  color: var(--color-text-teal);
-  transition-delay: 80ms;
-}
-.rainbow-title span:nth-child(6) {
-  color: var(--color-text-cyan);
-  transition-delay: 100ms;
-}
-.rainbow-title span:nth-child(7) {
-  /* 连字符，跟随默认文字色，不单独上色 */
-  transition-delay: 120ms;
-}
-.rainbow-title span:nth-child(8) {
-  color: var(--color-text-blue);
-  transition-delay: 140ms;
-}
-.rainbow-title span:nth-child(9) {
-  color: var(--color-text-purple);
-  transition-delay: 160ms;
-}
-.rainbow-title span:nth-child(10) {
-  color: var(--color-text-pink);
-  transition-delay: 180ms;
-}
-.rainbow-title span:nth-child(11) {
-  color: var(--color-text-gray);
-  transition-delay: 200ms;
-}
-.rainbow-title span:nth-child(12) {
-  color: var(--color-text-red);
-  transition-delay: 220ms;
+@keyframes rainbow-title-flow {
+  to {
+    background-position: 200% center;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .rainbow-title span {
-    transition: none;
+  .rainbow-title {
+    animation: none;
+    background-position: 0% center;
+  }
+
+  .rainbow-title:hover {
+    animation: none;
   }
 }
