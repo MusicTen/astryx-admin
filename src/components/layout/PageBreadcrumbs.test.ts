@@ -10,9 +10,10 @@ describe("getBreadcrumbLabels", () => {
     expect(getBreadcrumbLabels("/users")).toEqual(["nav.users"]);
   });
 
-  it("returns a two-level trail for nested settings routes", () => {
-    expect(getBreadcrumbLabels("/settings/appearance")).toEqual(["nav.settings", "nav.appearance"]);
-    expect(getBreadcrumbLabels("/settings/profile")).toEqual(["nav.settings", "nav.profile"]);
+  it("returns a two-level trail for every settings sub page", () => {
+    for (const key of ["profile", "account", "appearance", "notifications", "display"]) {
+      expect(getBreadcrumbLabels(`/settings/${key}`)).toEqual(["nav.settings", `settings.nav.${key}`]);
+    }
   });
 
   it("falls back to an empty array for unknown routes", () => {

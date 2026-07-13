@@ -1,10 +1,13 @@
 import { Breadcrumbs, BreadcrumbItem } from "@astryxdesign/core/Breadcrumbs";
 import { useTranslation } from "react-i18next";
 
+const SETTINGS_PAGES = ["profile", "account", "appearance", "notifications", "display"] as const;
+
 const BREADCRUMB_KEYS: Record<string, string[]> = {
   "/users": ["nav.users"],
-  "/settings/profile": ["nav.settings", "nav.profile"],
-  "/settings/appearance": ["nav.settings", "nav.appearance"],
+  ...Object.fromEntries(
+    SETTINGS_PAGES.map((page) => [`/settings/${page}`, ["nav.settings", `settings.nav.${page}`]]),
+  ),
 };
 
 export function getBreadcrumbLabels(pathname: string): string[] {

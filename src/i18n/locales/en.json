@@ -16,9 +16,7 @@
     "tasks": "Task Board",
     "apps": "Integrations",
     "users": "Users",
-    "settings": "Settings",
-    "profile": "Profile",
-    "appearance": "Appearance"
+    "settings": "Settings"
   },
   "userMenu": {
     "account": "Account",
@@ -185,14 +183,77 @@
     "emptyDescription": "Switch categories to see other apps"
   },
   "settings": {
-    "appearance": {
-      "pageTitle": "Appearance",
-      "cardTitle": "Appearance",
-      "cardDescription": "Adjust the interface theme and language"
+    "title": "Settings",
+    "description": "Manage your account settings and interface preferences",
+    "nav": {
+      "profile": "Profile",
+      "account": "Account",
+      "appearance": "Appearance",
+      "notifications": "Notifications",
+      "display": "Display"
     },
     "profile": {
-      "pageTitle": "Profile",
-      "notLoggedIn": "Not logged in"
+      "description": "This is how others will see you on the site",
+      "username": "Username",
+      "usernameDescription": "This is your public display name. It can be your real name or a pseudonym",
+      "usernameRequired": "Username cannot be empty",
+      "email": "Email",
+      "emailPlaceholder": "Select an email to display",
+      "emailDescription": "The contact email shown on your profile",
+      "bio": "Bio",
+      "bioPlaceholder": "Tell us a little about yourself…",
+      "bioDescription": "You can @mention other users and organizations",
+      "urlWebsite": "Website",
+      "urlSocial": "Social profile",
+      "urlsDescription": "Add links to your website, blog, or social profiles",
+      "submit": "Update profile",
+      "saved": "Profile updated"
+    },
+    "account": {
+      "description": "Update your account information and preferred language",
+      "name": "Name",
+      "nameDescription": "The name used for billing and other formal contexts",
+      "dob": "Date of birth",
+      "dobDescription": "Used to calculate your age",
+      "language": "Language",
+      "languagePlaceholder": "Select a language",
+      "languageDescription": "Demo field; does not affect the interface language",
+      "submit": "Update account",
+      "saved": "Account updated"
+    },
+    "appearance": {
+      "description": "Customize the interface appearance. Changes apply immediately",
+      "theme": "Theme",
+      "themeDescription": "Select the theme for the dashboard",
+      "language": "Language",
+      "languageDescription": "Interface language; switches immediately"
+    },
+    "notifications": {
+      "description": "Configure how you receive notifications",
+      "notifyAbout": "Notify me about…",
+      "notifyAll": "All new messages",
+      "notifyMentions": "Direct messages and mentions only",
+      "notifyNone": "Nothing",
+      "emailTitle": "Email notifications",
+      "emailCommunication": "Communication emails",
+      "emailCommunicationDescription": "Receive emails about your account activity",
+      "emailMarketing": "Marketing emails",
+      "emailMarketingDescription": "Receive emails about new products, features, and more",
+      "emailSocial": "Social emails",
+      "emailSocialDescription": "Receive emails for friend requests, follows, and more",
+      "submit": "Update notifications",
+      "saved": "Notification preferences updated"
+    },
+    "display": {
+      "description": "Control which modules appear in the sidebar",
+      "sidebarTitle": "Sidebar modules",
+      "sidebarDescription": "Select the modules shown in the sidebar (demo only; does not change navigation)",
+      "itemDashboard": "Dashboard",
+      "itemTasks": "Task Board",
+      "itemApps": "Integrations",
+      "itemUsers": "Users",
+      "submit": "Update display",
+      "saved": "Display preferences updated"
     }
   },
   "errors": {

@@ -4,7 +4,7 @@ import { SideNav, SideNavItem, SideNavSection } from "@astryxdesign/core/SideNav
 import { Stack } from "@astryxdesign/core/Stack";
 import { TopNav, TopNavHeading } from "@astryxdesign/core/TopNav";
 import { useRouterState } from "@tanstack/react-router";
-import { Blocks, KanbanSquare, LayoutDashboard, Palette, Settings, UserCircle, Users } from "lucide-react";
+import { Blocks, KanbanSquare, LayoutDashboard, Settings, Users } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useUiStore } from "../../stores/ui";
 import "./admin-shell.css";
@@ -77,25 +77,11 @@ export function AdminShell({ children }: { children: ReactNode }) {
             />
             <SideNavItem
               label={t("nav.settings")}
+              href="/settings"
               icon={Settings}
               selectedIcon={Settings}
-              collapsible={{ defaultIsCollapsed: false }}
-            >
-              <SideNavItem
-                label={t("nav.profile")}
-                href="/settings/profile"
-                icon={UserCircle}
-                selectedIcon={UserCircle}
-                isSelected={pathname === "/settings/profile"}
-              />
-              <SideNavItem
-                label={t("nav.appearance")}
-                href="/settings/appearance"
-                icon={Palette}
-                selectedIcon={Palette}
-                isSelected={pathname === "/settings/appearance"}
-              />
-            </SideNavItem>
+              isSelected={pathname.startsWith("/settings")}
+            />
           </SideNavSection>
         </SideNav>
       }
