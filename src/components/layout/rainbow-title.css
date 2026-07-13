@@ -1,0 +1,68 @@
+/* astryx-admin 品牌字标：每个字母用一个语义色 token 上色，纯 CSS3 nth-child 选择器 + hover 微交互实现 */
+.rainbow-title {
+  display: inline-flex;
+}
+
+.rainbow-title span {
+  display: inline-block;
+  transition: transform var(--duration-fast) var(--ease-standard);
+}
+
+.rainbow-title:hover span {
+  transform: translateY(-2px);
+}
+
+.rainbow-title span:nth-child(1) {
+  color: var(--color-text-red);
+  transition-delay: 0ms;
+}
+.rainbow-title span:nth-child(2) {
+  color: var(--color-text-orange);
+  transition-delay: 20ms;
+}
+.rainbow-title span:nth-child(3) {
+  color: var(--color-text-yellow);
+  transition-delay: 40ms;
+}
+.rainbow-title span:nth-child(4) {
+  color: var(--color-text-green);
+  transition-delay: 60ms;
+}
+.rainbow-title span:nth-child(5) {
+  color: var(--color-text-teal);
+  transition-delay: 80ms;
+}
+.rainbow-title span:nth-child(6) {
+  color: var(--color-text-cyan);
+  transition-delay: 100ms;
+}
+.rainbow-title span:nth-child(7) {
+  /* 连字符，跟随默认文字色，不单独上色 */
+  transition-delay: 120ms;
+}
+.rainbow-title span:nth-child(8) {
+  color: var(--color-text-blue);
+  transition-delay: 140ms;
+}
+.rainbow-title span:nth-child(9) {
+  color: var(--color-text-purple);
+  transition-delay: 160ms;
+}
+.rainbow-title span:nth-child(10) {
+  color: var(--color-text-pink);
+  transition-delay: 180ms;
+}
+.rainbow-title span:nth-child(11) {
+  color: var(--color-text-gray);
+  transition-delay: 200ms;
+}
+.rainbow-title span:nth-child(12) {
+  color: var(--color-text-red);
+  transition-delay: 220ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rainbow-title span {
+    transition: none;
+  }
+}

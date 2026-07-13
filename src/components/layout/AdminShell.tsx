@@ -10,6 +10,7 @@ import { useUiStore } from "../../stores/ui";
 import "./admin-shell.css";
 import { LanguageControl } from "./LanguageControl";
 import { PageBreadcrumbs } from "./PageBreadcrumbs";
+import { RainbowTitle } from "./RainbowTitle";
 import { ThemeModeControl } from "./ThemeModeControl";
 import { UserMenu } from "./UserMenu";
 
@@ -24,7 +25,7 @@ export function AdminShell({ children }: { children: ReactNode }) {
       contentPadding={4}
       topNav={
         <TopNav
-          heading={<TopNavHeading heading="Astryx Admin" headingHref="/" />}
+          heading={<TopNavHeading logo={<RainbowTitle />} logoLabel="Astryx Admin" headingHref="/" />}
           startContent={<PageBreadcrumbs pathname={pathname} />}
           endContent={
             <Stack direction="horizontal" gap={3}>
