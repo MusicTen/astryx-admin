@@ -5,7 +5,8 @@ import { Link as RouterLink } from "@tanstack/react-router";
 import i18n from "i18next";
 import { SwrProvider } from "../lib/swr";
 import { useUiStore } from "../stores/ui";
-import { appTheme } from "../theme/appTheme";
+import { astryxAdminTheme } from "../theme/astryx-admin";
+import "../theme/astryx-admin.css";
 
 const AppLink = forwardRef<HTMLAnchorElement, ComponentPropsWithoutRef<"a">>(function AppLink(
   { href, children, ...rest },
@@ -28,7 +29,7 @@ export function AppProviders({ children }: { children: ReactNode }) {
   }, [language]);
 
   return (
-    <Theme theme={appTheme} mode={themeMode}>
+    <Theme theme={astryxAdminTheme} mode={themeMode}>
       <LinkProvider component={AppLink}>
         <SwrProvider>{children}</SwrProvider>
       </LinkProvider>
