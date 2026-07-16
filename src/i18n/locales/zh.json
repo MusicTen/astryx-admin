@@ -76,6 +76,8 @@
   },
   "tasks": {
     "title": "任务看板",
+    "subtitle": "在这里管理本月的所有任务",
+    "pageHeaderLabel": "任务页面标题",
     "status": {
       "backlog": "待办",
       "inProgress": "进行中",
@@ -88,18 +90,41 @@
       "medium": "中",
       "low": "低"
     },
+    "label": {
+      "bug": "缺陷",
+      "feature": "功能",
+      "docs": "文档",
+      "chore": "杂项"
+    },
+    "columns": {
+      "task": "任务",
+      "title": "标题",
+      "status": "状态",
+      "priority": "优先级",
+      "actions": "操作"
+    },
+    "columnsLabel": "显示列",
     "actionsLabel": "任务操作",
     "new": "新建任务",
     "updated": "任务已更新",
     "created": "任务已创建",
     "deleted": "任务已删除",
-    "moveFailed": "移动任务失败，请稍后重试",
+    "filterLabel": "任务筛选",
+    "search": "搜索",
+    "searchPlaceholder": "按标题或编号筛选",
+    "batchDelete": "批量删除 ({{count}})",
+    "batchDeleted": "已删除 {{count}} 个任务",
+    "batchDeleteFailed": "批量删除失败，请稍后重试",
+    "paginationLabel": "任务列表分页",
     "emptyTitle": "暂无任务",
-    "emptyDescription": "点击右上角新建任务",
-    "unassigned": "未分配",
+    "emptyDescription": "调整筛选条件，或点击右上角新建任务",
     "deleteDialog": {
       "title": "删除任务",
       "description": "确定删除「{{title}}」吗？此操作不可撤销。"
+    },
+    "batchDeleteDialog": {
+      "title": "批量删除任务",
+      "description": "确定删除选中的 {{count}} 个任务吗？此操作不可撤销。"
     },
     "form": {
       "editTitle": "编辑任务",

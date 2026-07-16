@@ -12,3 +12,11 @@ export interface Task {
 }
 
 export type TaskInput = Omit<Task, "id" | "createdAt">;
+
+export interface TaskListParams {
+  page: number;
+  pageSize: number;
+  keyword: string;
+  statuses?: TaskStatus[];
+  priorities?: TaskPriority[];
+}

@@ -31,6 +31,8 @@ const EMPTY: TaskInput = {
   labels: [],
 };
 
+const DRAWER_HEIGHT = "100vh";
+
 interface TaskFormDialogProps {
   isOpen: boolean;
   editingTask: Task | null;
@@ -68,7 +70,15 @@ export function TaskFormDialog({
   }, [isOpen, editingTask]);
 
   return (
-    <Dialog isOpen={isOpen} onOpenChange={onOpenChange} purpose="form" width={480}>
+    <Dialog
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
+      purpose="form"
+      width={420}
+      maxHeight={DRAWER_HEIGHT}
+      position={{ top: 0, right: 0 }}
+      style={{ height: DRAWER_HEIGHT }}
+    >
       <DialogHeader title={editingTask ? t("tasks.form.editTitle") : t("tasks.form.createTitle")} onOpenChange={onOpenChange} />
       <Stack direction="vertical" gap={4}>
         <FormLayout direction="vertical">

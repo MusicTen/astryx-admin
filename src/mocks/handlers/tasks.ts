@@ -4,8 +4,39 @@ import { createSeedTasks, type MockTask } from "../data/tasks";
 export let tasks = createSeedTasks();
 let nextId = tasks.length + 1;
 
+export function resetTasks(): void {
+  tasks = createSeedTasks();
+  nextId = tasks.length + 1;
+}
+
 export const taskHandlers = [
-  http.get("*/api/tasks", () => HttpResponse.json({ items: tasks, total: tasks.length })),
+  http.get("*/api/tasks", ({ request }) => {
+    const url = new URL(request.url);
+    const page = Number(url.searchParams.get("page") ?? "1");
+    const pageSize = Number(url.searchParams.get("pageSize") ?? "10");
+    const keyword = url.searchParams.get("keyword") ?? "";
+    const statuses = url.searchParams.getAll("status");
+    const priorities = url.searchParams.getAll("priority");
+
+    let filtered = tasks;
+    if (keyword) {
+      filtered = filtered.filter(
+        (t) => t.title.includes(keyword) || `TASK-${t.id.padStart(4, "0")}`.includes(keyword),
+      );
+    }
+    if (statuses.length > 0) {
+      filtered = filtered.filter((t) => statuses.includes(t.status));
+    }
+    if (priorities.length > 0) {
+      filtered = filtered.filter((t) => priorities.includes(t.priority));
+    }
+
+    const start = (page - 1) * pageSize;
+    return HttpResponse.json({
+      items: filtered.slice(start, start + pageSize),
+      total: filtered.length,
+    });
+  }),
 
   http.post("*/api/tasks", async ({ request }) => {
     const body = (await request.json()) as Omit<MockTask, "id" | "createdAt">;

@@ -77,6 +77,8 @@
   },
   "tasks": {
     "title": "Task Board",
+    "subtitle": "Manage all your tasks for this month here",
+    "pageHeaderLabel": "Tasks page header",
     "status": {
       "backlog": "Backlog",
       "inProgress": "In Progress",
@@ -89,18 +91,43 @@
       "medium": "Medium",
       "low": "Low"
     },
+    "label": {
+      "bug": "Bug",
+      "feature": "Feature",
+      "docs": "Documentation",
+      "chore": "Chore"
+    },
+    "columns": {
+      "task": "Task",
+      "title": "Title",
+      "status": "Status",
+      "priority": "Priority",
+      "actions": "Actions"
+    },
+    "columnsLabel": "View",
     "actionsLabel": "Task actions",
     "new": "New Task",
     "updated": "Task updated",
     "created": "Task created",
     "deleted": "Task deleted",
-    "moveFailed": "Failed to move task. Please try again later.",
+    "filterLabel": "Task filters",
+    "search": "Search",
+    "searchPlaceholder": "Filter by title or ID",
+    "batchDelete": "Batch Delete ({{count}})",
+    "batchDeleted_one": "Deleted {{count}} task",
+    "batchDeleted_other": "Deleted {{count}} tasks",
+    "batchDeleteFailed": "Batch delete failed. Please try again later.",
+    "paginationLabel": "Task list pagination",
     "emptyTitle": "No tasks",
-    "emptyDescription": "Click \"New Task\" in the top right to create one",
-    "unassigned": "Unassigned",
+    "emptyDescription": "Adjust the filters, or click \"New Task\" in the top right",
     "deleteDialog": {
       "title": "Delete Task",
       "description": "Delete \"{{title}}\"? This action cannot be undone."
+    },
+    "batchDeleteDialog": {
+      "title": "Batch Delete Tasks",
+      "description_one": "Delete the {{count}} selected task? This action cannot be undone.",
+      "description_other": "Delete the {{count}} selected tasks? This action cannot be undone."
     },
     "form": {
       "editTitle": "Edit Task",
