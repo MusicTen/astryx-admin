@@ -34,7 +34,7 @@ export function RecentSalesList() {
           <Stack direction="vertical" gap={4}>
             {users.map((user, index) => (
               <Stack key={user.id} direction="horizontal" gap={3}>
-                <Avatar name={user.name} size="small" />
+                <Avatar name={user.name} size="sm" />
                 <StackItem size="fill">
                   <Stack direction="vertical" gap={0}>
                     <Text type="body">{user.name}</Text>

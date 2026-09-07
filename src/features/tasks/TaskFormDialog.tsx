@@ -76,7 +76,7 @@ export function TaskFormDialog({
       purpose="form"
       width={420}
       maxHeight={DRAWER_HEIGHT}
-      position={{ top: 0, right: 0 }}
+      position={{ top: 0, end: 0 }}
       style={{ height: DRAWER_HEIGHT }}
     >
       <DialogHeader title={editingTask ? t("tasks.form.editTitle") : t("tasks.form.createTitle")} onOpenChange={onOpenChange} />

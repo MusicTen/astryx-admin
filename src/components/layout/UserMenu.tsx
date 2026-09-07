@@ -18,7 +18,7 @@ export function UserMenu() {
     <DropdownMenu
       button={{
         label: user?.name ?? t("userMenu.account"),
-        icon: <Avatar name={user?.name ?? "?"} size="tiny" />,
+        icon: <Avatar name={user?.name ?? "?"} size="xsm" />,
         isIconOnly: true,
         variant: "ghost",
         size: "sm",
