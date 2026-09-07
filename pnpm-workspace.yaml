@@ -1,4 +1,6 @@
 allowBuilds:
+  '@astryxdesign/cli': true
+  '@astryxdesign/core': true
   msw: true
 minimumReleaseAgeExclude:
   - '@voidzero-dev/vite-plus-core@0.2.4'
