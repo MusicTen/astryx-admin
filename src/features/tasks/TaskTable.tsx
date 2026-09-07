@@ -136,6 +136,13 @@ export function TaskTable() {
     setSelectedKeys(new Set());
   }, [page, keyword, statuses, priorities]);
 
+  // 删除末页末条后 total 收缩，收敛越界的 page 以避免请求空页（切页加载期 total 暂为 0，等数据就绪后再收敛）
+  const maxPage = Math.max(1, Math.ceil(total / pageSize));
+  useEffect(() => {
+    if (isLoading) return;
+    if (page > maxPage) setPage(maxPage);
+  }, [page, maxPage, isLoading]);
+
   const notifyError = (error: unknown, fallback: string) => {
     toast({ body: error instanceof ApiError ? error.message : fallback, type: "error" });
   };
@@ -375,7 +382,7 @@ export function TaskTable() {
         }
       />
 
-      {isLoading ? (
+      {isLoading || (tasks.length === 0 && page > maxPage) ? (
         <Stack direction="vertical" gap={2}>
           <Skeleton height={40} />
           <Skeleton height={40} />
