@@ -1,0 +1,15 @@
+# 产物浏览器兼容性目标（单一真源，统一驱动 JS 转译(esbuild) 与 CSS 处理(lightningcss)）
+#
+# `defaults` = > 0.5%, last 2 versions, Firefox ESR, not dead
+# 即覆盖全球用量 > 0.5% 的主流浏览器，并排除已停止维护的(dead)版本。
+# 该基线为开源 admin 模板的常见选择：兼容面广，且无需额外运行时 polyfill
+# （基建寿命约束在 chrome109/safari16.4 之上，Object.hasOwn / structuredClone
+#   等本包用到的运行时 API 在此基线内均可直接用）。
+#
+# 需要更保守的产品基线时，改成例如：
+#   last 2 years
+#   or: chrome >= 90, firefox >= 90, safari >= 14, edge >= 90, ios_saf >= 14
+# 注意：一旦基线低于 Object.hasOwn(93)/structuredClone(98) 等，就必须引入 core-js polyfill，
+#       否则契约不成立（browserslist 只转译语法，不 polyfill 运行时 API）。
+
+defaults

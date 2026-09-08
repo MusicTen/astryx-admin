@@ -38,6 +38,8 @@
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",
     "@vitejs/plugin-react": "^6.1.1",
+    "browserslist": "^4.28.9",
+    "browserslist-to-esbuild": "^2.1.1",
     "happy-dom": "^20.14.0",
     "msw": "^2.15.0",
     "typescript": "^7.0.2",

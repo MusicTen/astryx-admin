@@ -95,6 +95,7 @@ src/
 - 新增接口：`features/<domain>/api.ts` 定义请求函数 + `src/mocks/handlers/` 补 mock
 - 新增页面：在 `src/routes/` 下建文件即可（构建时自动生成 `routeTree.gen.ts`）
 - 侧边栏图标统一用 `lucide-react`（与 Astryx 的 `icon: ComponentType<SVGProps>` 原生兼容，不用 iconify 是为了省掉一层适配器）
+- **浏览器兼容目标统一走 `.browserslistrc`**：单一真源同时驱动 JS 转译（esbuild）与 CSS 处理（lightningcss）；要改兼容范围只改这一个文件
 
 ## 已知工程决策
 
@@ -103,3 +104,4 @@ src/
 - msw 的 postinstall 通过 `pnpm-workspace.yaml` 的 `allowBuilds` 放行
 - 面包屑用 pathname 静态映射表（`PageBreadcrumbs.tsx`）而非通用路径解析器：路由总数少，写通用解析器是过度设计
 - 顶栏的语言/主题切换与设置页复用同一组件（`isIconOnly` 属性区分图标态与文字态），避免两处状态逻辑漂移
+- 产物兼容性用 `.browserslistrc`（默认 `defaults`）+ `browserslist-to-esbuild`：Vite 8 默认 `baseline-widely-available` 不会读 browserslist，这里显式把 browserslist 解析成 `build.target`，JS 与 CSS 目标因此保持一致；`defaults` 基线（≥ chrome109/safari16.4）已覆盖本包用到的运行时 API（`Object.hasOwn`/`structuredClone`/`.at()`），无需额外 core-js polyfill——若未来收紧基线到低于这些 API 的浏览器，需另行注入 polyfill 才会实际生效

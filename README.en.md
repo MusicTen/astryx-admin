@@ -95,6 +95,7 @@ src/
 - New API: define the request function in `features/<domain>/api.ts` + add a mock in `src/mocks/handlers/`
 - New page: just add a file under `src/routes/` (`routeTree.gen.ts` is generated at build time)
 - Sidebar icons use `lucide-react` exclusively (natively compatible with Astryx's `icon: ComponentType<SVGProps>`; iconify was skipped to avoid an adapter layer)
+- **Browser compatibility targets come from a single source, `.browserslistrc`**: it drives both JS transpilation (esbuild) and CSS processing (lightningcss); change compatibility by editing that one file
 
 ## Engineering Decisions
 
@@ -103,3 +104,4 @@ src/
 - msw's postinstall script is allowed via the `allowBuilds` field in `pnpm-workspace.yaml`
 - Breadcrumbs use a static pathname map (`PageBreadcrumbs.tsx`) instead of a generic path parser: the route count is small, and a generic parser would be over-engineering
 - The top-nav language/theme toggles reuse the same components as the settings page (an `isIconOnly` prop switches between icon and text form), so the state logic can't drift between the two
+- Build compatibility uses `.browserslistrc` (default `defaults`) wired via `browserslist-to-esbuild`: Vite 8's default `baseline-widely-available` doesn't read browserslist, so we explicitly resolve browserslist into `build.target`, keeping the JS and CSS targets consistent; the `defaults` baseline (≥ chrome109/safari16.4) already covers the runtime APIs this app uses (`Object.hasOwn`/`structuredClone`/`.at()`), so no core-js polyfills are needed — if you later tighten the baseline below those APIs, you must inject polyfills for the contract to actually hold

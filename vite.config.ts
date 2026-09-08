@@ -1,6 +1,7 @@
 import { fileURLToPath } from "node:url";
 import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
+import browserslistToEsbuild from "browserslist-to-esbuild";
 import { astryxStylex } from "@astryxdesign/build/vite";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
 
@@ -69,9 +70,19 @@ const lint = {
 
 // 中间变量绕过对象字面量的多余属性检查：vitest 的 UserConfig 类型不认识 lint 键，
 // 但 vp lint 运行时读取的是导出的配置对象本身
+// 产物浏览器兼容目标：单一真源 `.browserslistrc`，统一驱动 JS 转译(esbuild) 与
+// CSS 处理(lightningcss)。Vite 8 不会主动读 browserslist，这里显式把 browserslist
+// 解析成 esbuild target 传给 build.target；CSS 侧 Vite 会由 build.target 自动推导。
+// 调整兼容范围只需改 `.browserslistrc`（注意：若基线低于 Object.hasOwn(93) /
+// structuredClone(98) 等运行时 API，需另行引入 core-js polyfill，见 .browserslistrc 注释）。
+const build = {
+  target: browserslistToEsbuild(),
+};
+
 const config = {
   base,
   lint,
+  build,
   test: {
     environment: "happy-dom",
     setupFiles: ["./src/test/setup.ts"],
